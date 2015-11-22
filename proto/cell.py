@@ -10,12 +10,6 @@ class Cell:
     def move_down(self):
         return Cell(self.row + 2, self.column, self.content)
 
-    def move_left(self):
-        return Cell(self.row, self.column + 2, self.content)
-
-    def move_right(self):
-        return Cell(self.row, self.column - 2, self.content)
-
     def move_up_right(self):
         return Cell(self.row - 1, self.column - 1, self.content)
 
@@ -31,8 +25,6 @@ class Cell:
     def get_round_bbox(self):
         yield self.move_up()
         yield self.move_down()
-        yield self.move_left()
-        yield self.move_right()
         yield self.move_up_left()
         yield self.move_up_right()
         yield self.move_down_left()
