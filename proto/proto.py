@@ -3,6 +3,7 @@ import pygame
 from hex_map import HexMap
 from map_view import MapView
 from player import Player
+from camera import Camera
 import globals
 
 black = pygame.Color(0, 0, 0)
@@ -24,27 +25,23 @@ hex_map = HexMap(globals.WORLD_WIDTH, globals.WORLD_HEIGHT)
 map_view = MapView(background, hex_map, pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT))
 player = Player(background, map_view, globals.CAMERA_ROW, globals.CAMERA_COLUMN)
 
-hex_map.fill_map()
-
-background.fill(black)
+hex_map.fill_ground()
+cell = hex_map.get_cell(globals.CAMERA_ROW, globals.CAMERA_COLUMN)
+cell.entities['camera'] = Camera(map_view)
 
 while not done:
 
     clock.tick(60)
+    background.fill(black)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
         if event.type == pygame.MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
-            cell = map_view.screen_to_cell(pos)
-            if cell:
-                player.on_cell_click(cell)
-
-    background.fill(black)
+            map_view.on_click(pos)
 
     map_view.draw()
-    player.draw()
 
     screen.blit(background, (0, 0))
     pygame.display.flip()

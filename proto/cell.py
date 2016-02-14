@@ -8,6 +8,10 @@ class Cell:
         for tp in self.entities:
             self.entities[tp].draw(surface, px, py)
 
+    def on_cell_click(self, cell):
+        for k in self.entities.keys():
+            self.entities[k].on_cell_click(self, cell)
+
     def get_round_bbox(self):
         yield Cell(self.row - 2, self.column, self.entities)
         yield Cell(self.row + 2, self.column, self.entities)

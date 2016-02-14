@@ -16,19 +16,17 @@ class GroundType:
 
 
 class Ground:
-    def __init__(self, hex_map, ground_type):
-        self.hex_map = hex_map
+    def __init__(self, ground_type):
         self.ground_type = ground_type
 
-    @property
-    def entity_type(self):
-        return self.__class__.__name__
+    def on_cell_click(self, parent_cell, cell):
+        pass
 
     def draw(self, surface, px, py):
         points = []
         for ang in range(6):
-            x = px + self.hex_map.radius * math.cos(math.radians((ang + 1) * 60))
-            y = py + self.hex_map.radius * math.sin(math.radians((ang + 1) * 60))
+            x = px + globals.HEX_RADIUS * math.cos(math.radians((ang + 1) * 60))
+            y = py + globals.HEX_RADIUS * math.sin(math.radians((ang + 1) * 60))
             points.append([x + globals.VIEW_OFFSET[0], y + globals.VIEW_OFFSET[1]])
         if self.ground_type == GroundType.GRASS:
             color = blue
