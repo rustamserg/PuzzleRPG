@@ -1,12 +1,6 @@
-import pygame
 from cell import Cell
-from ground import Ground
+from ground import Ground, GroundType
 import globals
-
-green = pygame.Color(0, 255, 0)
-blue = pygame.Color(0, 0, 255)
-
-colors = [blue, green]
 
 
 class HexMap:
@@ -26,7 +20,7 @@ class HexMap:
                 elif row % 2 != 0 and column % 2 == 0:
                     self.cells[row].append(None)
                 else:
-                    self.cells[row].append(Cell(row, column, []))
+                    self.cells[row].append(Cell(row, column, {}))
 
     def get_cell(self, row, column):
         if 0 <= row < self.height:
@@ -39,8 +33,8 @@ class HexMap:
             for column in range(self.width):
                 if self.cells[row][column]:
                     if row < globals.CAMERA_ROW or row > globals.WORLD_WIDTH - globals.CAMERA_ROW:
-                        self.cells[row][column].entities.append(Ground(self, colors[0]))
+                        self.cells[row][column].entities[Ground.entity_type] = Ground(self, GroundType.GRASS)
                     elif column < globals.CAMERA_COLUMN or column > globals.WORLD_HEIGHT - globals.CAMERA_COLUMN:
-                        self.cells[row][column].entities.append(Ground(self, colors[0]))
+                        self.cells[row][column].entities[Ground.entity_type] = Ground(self, GroundType.GRASS)
                     else:
-                        self.cells[row][column].entities.append(Ground(self, colors[1]))
+                        self.cells[row][column].entities[Ground.entity_type] = Ground(self, GroundType.WATER)
