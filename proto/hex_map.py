@@ -3,7 +3,6 @@ from cell import Cell
 from ground import Ground
 import globals
 
-
 green = pygame.Color(0, 255, 0)
 blue = pygame.Color(0, 0, 255)
 
@@ -39,10 +38,9 @@ class HexMap:
         for row in range(self.height):
             for column in range(self.width):
                 if self.cells[row][column]:
-                    if row < globals.WORLD_PLAYER_ROW or row > globals.WORLD_WIDTH - globals.WORLD_PLAYER_ROW:
-                        self.cells[row][column].content.append(Ground(self, colors[0]))
-                    elif column < globals.WORLD_PLAYER_COLUMN or column > globals.WORLD_HEIGHT - globals.WORLD_PLAYER_COLUMN:
-                        self.cells[row][column].content.append(Ground(self, colors[0]))
+                    if row < globals.CAMERA_ROW or row > globals.WORLD_WIDTH - globals.CAMERA_ROW:
+                        self.cells[row][column].entities.append(Ground(self, colors[0]))
+                    elif column < globals.CAMERA_COLUMN or column > globals.WORLD_HEIGHT - globals.CAMERA_COLUMN:
+                        self.cells[row][column].entities.append(Ground(self, colors[0]))
                     else:
-                        self.cells[row][column].content.append(Ground(self, colors[1]))
-
+                        self.cells[row][column].entities.append(Ground(self, colors[1]))

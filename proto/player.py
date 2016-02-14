@@ -12,11 +12,11 @@ class Player:
     def on_cell_click(self, cell):
         for c in cell.get_round_bbox():
             if c.row == self.row and c.column == self.column:
-                nr = pygame.Rect(0, 0, globals.WORLD_VIEW_WIDTH, globals.WORLD_VIEW_HEIGHT)
-                nr = nr.move(cell.column - globals.WORLD_PLAYER_COLUMN, cell.row - globals.WORLD_PLAYER_ROW)
+                nr = pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT)
+                nr = nr.move(cell.column - globals.CAMERA_COLUMN, cell.row - globals.CAMERA_ROW)
                 if nr.top >= 0 and nr.left >= 0:
-                    if globals.WORLD_HEIGHT >= nr.top + globals.WORLD_VIEW_HEIGHT:
-                        if globals.WORLD_WIDTH >= nr.left + globals.WORLD_VIEW_WIDTH:
+                    if globals.WORLD_HEIGHT >= nr.top + globals.VIEW_HEIGHT:
+                        if globals.WORLD_WIDTH >= nr.left + globals.VIEW_WIDTH:
                             self.map_view.view_rect = nr
                             self.column = cell.column
                             self.row = cell.row

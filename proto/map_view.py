@@ -32,8 +32,8 @@ class MapView:
                     py = view_row * self.hex_map.radius * math.sqrt(3) / 2
                     view_col += 1
 
-                    px += globals.WORLD_VIEW_OFFSET[0]
-                    py += globals.WORLD_VIEW_OFFSET[1]
+                    px += globals.VIEW_OFFSET[0]
+                    py += globals.VIEW_OFFSET[1]
                     if math.pow(px - pos[0], 2) + math.pow(py - pos[1], 2) < math.pow(self.hex_map.radius, 2):
                         return cell
             view_row += 1
@@ -50,8 +50,8 @@ class MapView:
                         px = view_col * self.hex_map.radius * 3 + view_row % 2 * (self.hex_map.radius * 3 / 2)
                         py = view_row * self.hex_map.radius * math.sqrt(3) / 2
 
-                        px += globals.WORLD_VIEW_OFFSET[0]
-                        py += globals.WORLD_VIEW_OFFSET[1]
+                        px += globals.VIEW_OFFSET[0]
+                        py += globals.VIEW_OFFSET[1]
                         return int(px), int(py)
                     view_col += 1
             view_row += 1
