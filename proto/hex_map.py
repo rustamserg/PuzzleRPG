@@ -1,5 +1,6 @@
 import pygame
 from cell import Cell
+from ground import Ground
 import globals
 
 
@@ -26,7 +27,7 @@ class HexMap:
                 elif row % 2 != 0 and column % 2 == 0:
                     self.cells[row].append(None)
                 else:
-                    self.cells[row].append(Cell(row, column, 0))
+                    self.cells[row].append(Cell(row, column, []))
 
     def get_cell(self, row, column):
         if 0 <= row < self.height:
@@ -39,9 +40,9 @@ class HexMap:
             for column in range(self.width):
                 if self.cells[row][column]:
                     if row < globals.WORLD_PLAYER_ROW or row > globals.WORLD_WIDTH - globals.WORLD_PLAYER_ROW:
-                        self.cells[row][column].content = colors[0]
+                        self.cells[row][column].content.append(Ground(self, colors[0]))
                     elif column < globals.WORLD_PLAYER_COLUMN or column > globals.WORLD_HEIGHT - globals.WORLD_PLAYER_COLUMN:
-                        self.cells[row][column].content = colors[0]
+                        self.cells[row][column].content.append(Ground(self, colors[0]))
                     else:
-                        self.cells[row][column].content = colors[1]
+                        self.cells[row][column].content.append(Ground(self, colors[1]))
 

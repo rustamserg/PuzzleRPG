@@ -21,7 +21,7 @@ background = pygame.Surface(screen.get_size())
 background = background.convert()
 
 hex_map = HexMap(globals.WORLD_WIDTH, globals.WORLD_HEIGHT)
-map_view = MapView(background, hex_map, pygame.Rect(0, 0, globals.WORLD_VIEW_WIDTH, globals.WORLD_VIEW_HEIGHT), (40, 40))
+map_view = MapView(background, hex_map, pygame.Rect(0, 0, globals.WORLD_VIEW_WIDTH, globals.WORLD_VIEW_HEIGHT))
 player = Player(background, map_view, globals.WORLD_PLAYER_ROW, globals.WORLD_PLAYER_COLUMN)
 
 hex_map.fill_map()

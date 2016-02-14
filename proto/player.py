@@ -17,7 +17,7 @@ class Player:
                 if nr.top >= 0 and nr.left >= 0:
                     if globals.WORLD_HEIGHT >= nr.top + globals.WORLD_VIEW_HEIGHT:
                         if globals.WORLD_WIDTH >= nr.left + globals.WORLD_VIEW_WIDTH:
-                            self.map_view.view = nr
+                            self.map_view.view_rect = nr
                             self.column = cell.column
                             self.row = cell.row
 
