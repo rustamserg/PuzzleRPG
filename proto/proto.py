@@ -23,11 +23,11 @@ background = background.convert()
 
 hex_map = HexMap(globals.WORLD_WIDTH, globals.WORLD_HEIGHT)
 map_view = MapView(background, hex_map, pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT))
-player = Player(background, map_view, globals.CAMERA_ROW, globals.CAMERA_COLUMN)
-
 hex_map.fill_ground()
-cell = hex_map.get_cell(globals.CAMERA_ROW, globals.CAMERA_COLUMN)
-cell.entities['camera'] = Camera(map_view)
+
+starting_cell = hex_map.get_cell(globals.CAMERA_ROW, globals.CAMERA_COLUMN)
+starting_cell.entities['camera'] = Camera(map_view)
+starting_cell.entities['player'] = Player()
 
 while not done:
 

@@ -1,28 +1,21 @@
 import pygame
-import globals
+from ground import GroundType
 
 
 class Player:
-    def __init__(self, surface, map_view, row, column):
-        self.surface = surface
-        self.row = row
-        self.column = column
-        self.map_view = map_view
+    def __init__(self):
+        pass
 
-    def on_cell_click(self, cell):
-        for c in cell.get_round_bbox():
-            if c.row == self.row and c.column == self.column:
-                nr = pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT)
-                nr = nr.move(cell.column - globals.CAMERA_COLUMN, cell.row - globals.CAMERA_ROW)
-                if nr.top >= 0 and nr.left >= 0:
-                    if globals.WORLD_HEIGHT >= nr.top + globals.VIEW_HEIGHT:
-                        if globals.WORLD_WIDTH >= nr.left + globals.VIEW_WIDTH:
-                            self.map_view.view_rect = nr
-                            self.column = cell.column
-                            self.row = cell.row
+    def entity_type(self):
+        return self.__class__.__name__
 
-    def draw(self):
-        pos = self.map_view.cell_to_screen(self.row, self.column)
-        if pos:
-            pygame.draw.circle(self.surface, pygame.Color(255, 0, 0), pos, 10)
-            pygame.draw.circle(self.surface, pygame.Color(0, 0, 0), pos, 10, 1)
+    def on_cell_click(self, parent_cell, cell):
+        if cell.entities['ground'].ground_type == GroundType.GRASS:
+            for c in parent_cell.get_round_bbox():
+                if c.row == cell.row and c.column == cell.column:
+                    del parent_cell.entities['player']
+                    cell.entities['player'] = self
+
+    def draw(self, surface, px, py):
+        pygame.draw.circle(surface, pygame.Color(255, 0, 0), (int(px), int(py)), 10)
+        pygame.draw.circle(surface, pygame.Color(0, 0, 0), (int(px), int(py)), 10, 1)

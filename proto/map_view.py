@@ -24,9 +24,7 @@ class MapView:
             for col in xrange(self.view_rect.left, self.view_rect.left + self.view_rect.width):
                 cell = self.hex_map.get_cell(row, col)
                 if cell:
-                    px = view_col * globals.HEX_RADIUS * 3 + view_row % 2 * (globals.HEX_RADIUS * 3 / 2)
-                    py = view_row * globals.HEX_RADIUS * math.sqrt(3) / 2
-                    cell.draw(self.surface, px, py)
+                    cell.draw(self.surface)
                     view_col += 1
             view_row += 1
 

@@ -1,6 +1,7 @@
 import pygame
 import math
 import globals
+from entity import Entity
 
 green = pygame.Color(0, 255, 0)
 blue = pygame.Color(0, 0, 255)
@@ -15,12 +16,10 @@ class GroundType:
     GRASS = 2
 
 
-class Ground:
-    def __init__(self, ground_type):
+class Ground(Entity):
+    def __init__(self, cell, ground_type):
+        Entity.__init__(self, cell)
         self.ground_type = ground_type
-
-    def on_cell_click(self, parent_cell, cell):
-        pass
 
     def draw(self, surface, px, py):
         points = []
