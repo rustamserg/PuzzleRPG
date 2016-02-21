@@ -1,6 +1,6 @@
 import globals
-from ground import Ground, GroundType
-from layer import Layer
+from core.layer import Layer
+from entities.ground import Ground, GroundType
 
 
 class GroundLayer(Layer):

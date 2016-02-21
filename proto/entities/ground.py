@@ -1,7 +1,8 @@
-import pygame
 import math
+import pygame
+
 import globals
-from entity import Entity
+from core.entity import Entity
 
 green = pygame.Color(0, 255, 0)
 blue = pygame.Color(0, 0, 255)

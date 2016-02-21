@@ -1,6 +1,6 @@
 import globals
-from layer import Layer
-from player import Player
+from core.layer import Layer
+from entities.player import Player
 
 
 class PlayerLayer(Layer):

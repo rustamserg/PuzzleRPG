@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 import pygame
-from hex_map import HexMap
-from map_view import MapView
-from ground_layer import GroundLayer
-from player_layer import PlayerLayer
+
 import globals
+from hex_map import HexMap
+from layers.ground_layer import GroundLayer
+from layers.player_layer import PlayerLayer
+from map_view import MapView
 
 black = pygame.Color(0, 0, 0)
 

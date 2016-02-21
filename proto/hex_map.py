@@ -1,6 +1,4 @@
-from cell import Cell
-from ground import Ground, GroundType
-import globals
+from core.cell import Cell
 
 
 class HexMap:
