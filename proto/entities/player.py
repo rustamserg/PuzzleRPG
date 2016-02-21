@@ -1,5 +1,5 @@
 import pygame
-
+from core.cell import Cell
 from core.entity import Entity
 
 
@@ -13,3 +13,9 @@ class Player(Entity):
             px, py = map_view.cell_to_screen(self.cell)
             pygame.draw.circle(surface, pygame.Color(255, 0, 0), (px, py), 10)
             pygame.draw.circle(surface, pygame.Color(0, 0, 0), (px, py), 10, 1)
+
+    def on_cell_click(self, map_view, cell):
+        for c in Cell.round_bbox(self.cell):
+            if c == cell:
+                map_view.move_view(cell)
+                self.cell = cell

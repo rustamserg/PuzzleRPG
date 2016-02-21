@@ -1,3 +1,4 @@
+import pygame
 import math
 import globals
 
@@ -15,6 +16,14 @@ class MapView:
         if cell.column not in xrange(self.view_rect.left, self.view_rect.left + self.view_rect.width):
             return False
         return True
+
+    def move_view(self, cell):
+        nr = pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT)
+        nr = nr.move(cell.column - globals.CAMERA_COLUMN, cell.row - globals.CAMERA_ROW)
+        if nr.top >= 0 and nr.left >= 0:
+            if globals.WORLD_HEIGHT >= nr.top + globals.VIEW_HEIGHT:
+                if globals.WORLD_WIDTH >= nr.left + globals.VIEW_WIDTH:
+                    self.view_rect = nr
 
     def on_click(self, pos):
         cell = self.screen_to_cell(pos)
