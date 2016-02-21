@@ -5,7 +5,7 @@ import globals
 from hex_map import HexMap
 from layers.ground_layer import GroundLayer
 from layers.player_layer import PlayerLayer
-from map_view import MapView
+from world import World
 
 black = pygame.Color(0, 0, 0)
 
@@ -23,7 +23,7 @@ background = pygame.Surface(screen.get_size())
 background = background.convert()
 
 hex_map = HexMap(globals.WORLD_WIDTH, globals.WORLD_HEIGHT)
-map_view = MapView(background, hex_map, pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT))
+world = World(background, hex_map, pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT))
 
 ground_layer = GroundLayer(hex_map)
 player_layer = PlayerLayer(hex_map)
@@ -31,8 +31,8 @@ player_layer = PlayerLayer(hex_map)
 ground_layer.fill_ground()
 player_layer.spawn_player()
 
-map_view.add_layer(ground_layer)
-map_view.add_layer(player_layer)
+world.add_layer(ground_layer)
+world.add_layer(player_layer)
 
 while not done:
 
@@ -44,9 +44,9 @@ while not done:
             done = True
         if event.type == pygame.MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
-            map_view.on_click(pos)
+            world.on_click(pos)
 
-    map_view.draw()
+    world.draw()
 
     screen.blit(background, (0, 0))
     pygame.display.flip()

@@ -23,9 +23,9 @@ class Ground(Entity):
         self.ground_type = ground_type
         self.cell = cell
 
-    def draw(self, map_view, surface):
-        if map_view.is_in_view(self.cell):
-            px, py = map_view.cell_to_screen(self.cell)
+    def draw(self, world, surface):
+        if world.is_in_camera(self.cell):
+            px, py = world.cell_to_screen(self.cell)
             points = []
             for ang in range(6):
                 x = px + globals.HEX_RADIUS * math.cos(math.radians((ang + 1) * 60))

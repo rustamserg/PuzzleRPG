@@ -3,11 +3,11 @@ import math
 import globals
 
 
-class MapView:
-    def __init__(self, surface, hex_map, view_rect):
+class World:
+    def __init__(self, surface, hex_map, camera_view):
         self.surface = surface
         self.hex_map = hex_map
-        self.view_rect = view_rect
+        self.camera_view = camera_view
         self.layers = []
 
     def add_layer(self, layer):
@@ -19,20 +19,20 @@ class MapView:
                 return layer
         return None
 
-    def is_in_view(self, cell):
-        if cell.row not in xrange(self.view_rect.top, self.view_rect.top + self.view_rect.height):
+    def is_in_camera(self, cell):
+        if cell.row not in xrange(self.camera_view.top, self.camera_view.top + self.camera_view.height):
             return False
-        if cell.column not in xrange(self.view_rect.left, self.view_rect.left + self.view_rect.width):
+        if cell.column not in xrange(self.camera_view.left, self.camera_view.left + self.camera_view.width):
             return False
         return True
 
-    def move_view(self, cell):
+    def move_camera(self, cell):
         nr = pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT)
         nr = nr.move(cell.column - globals.CAMERA_COLUMN, cell.row - globals.CAMERA_ROW)
         if nr.top >= 0 and nr.left >= 0:
             if globals.WORLD_HEIGHT >= nr.top + globals.VIEW_HEIGHT:
                 if globals.WORLD_WIDTH >= nr.left + globals.VIEW_WIDTH:
-                    self.view_rect = nr
+                    self.camera_view = nr
 
     def on_click(self, pos):
         cell = self.screen_to_cell(pos)
@@ -46,9 +46,9 @@ class MapView:
 
     def screen_to_cell(self, pos):
         view_row = 0
-        for row in xrange(self.view_rect.top, self.view_rect.top + self.view_rect.height):
+        for row in xrange(self.camera_view.top, self.camera_view.top + self.camera_view.height):
             view_col = 0
-            for col in xrange(self.view_rect.left, self.view_rect.left + self.view_rect.width):
+            for col in xrange(self.camera_view.left, self.camera_view.left + self.camera_view.width):
                 cell = self.hex_map.get_cell(row, col)
                 if cell:
                     px = view_col * globals.HEX_RADIUS * 3 + view_row % 2 * (globals.HEX_RADIUS * 3 / 2)
@@ -64,9 +64,9 @@ class MapView:
 
     def cell_to_screen(self, cell):
         view_row = 0
-        for r in xrange(self.view_rect.top, self.view_rect.top + self.view_rect.height):
+        for r in xrange(self.camera_view.top, self.camera_view.top + self.camera_view.height):
             view_col = 0
-            for c in xrange(self.view_rect.left, self.view_rect.left + self.view_rect.width):
+            for c in xrange(self.camera_view.left, self.camera_view.left + self.camera_view.width):
                 map_cell = self.hex_map.get_cell(r, c)
                 if map_cell:
                     if map_cell.column == cell.column and map_cell.row == cell.row:
