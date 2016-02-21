@@ -1,13 +1,9 @@
 class Entity:
-    def __init__(self, cell):
-        self.owner = cell
-
-    @property
-    def entity_type(self):
-        return str(self.__class__.__name__)
-
-    def draw(self, surface):
+    def __init__(self):
         pass
 
-    def on_cell_click(self, cell):
+    def draw(self, map_view, surface):
+        pass
+
+    def on_cell_click(self, map_view, cell):
         pass

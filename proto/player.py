@@ -1,21 +1,14 @@
 import pygame
-from ground import GroundType
+from entity import Entity
 
 
-class Player:
-    def __init__(self):
-        pass
+class Player(Entity):
+    def __init__(self, cell):
+        Entity.__init__(self)
+        self.cell = cell
 
-    def entity_type(self):
-        return self.__class__.__name__
-
-    def on_cell_click(self, parent_cell, cell):
-        if cell.entities['ground'].ground_type == GroundType.GRASS:
-            for c in parent_cell.get_round_bbox():
-                if c.row == cell.row and c.column == cell.column:
-                    del parent_cell.entities['player']
-                    cell.entities['player'] = self
-
-    def draw(self, surface, px, py):
-        pygame.draw.circle(surface, pygame.Color(255, 0, 0), (int(px), int(py)), 10)
-        pygame.draw.circle(surface, pygame.Color(0, 0, 0), (int(px), int(py)), 10, 1)
+    def draw(self, map_view, surface):
+        if map_view.is_in_view(self.cell):
+            px, py = map_view.cell_to_screen(self.cell)
+            pygame.draw.circle(surface, pygame.Color(255, 0, 0), (px, py), 10)
+            pygame.draw.circle(surface, pygame.Color(0, 0, 0), (px, py), 10, 1)

@@ -1,21 +1,37 @@
 class Cell:
-    def __init__(self, row, column, entities):
+    def __init__(self, row, column):
         self.row = row
         self.column = column
-        self.entities = entities
 
-    def draw(self, surface, px, py):
-        for tp in self.entities:
-            self.entities[tp].draw(surface, px, py)
+    @staticmethod
+    def up(cell):
+        return Cell(cell.row - 2, cell.column)
 
-    def on_cell_click(self, cell):
-        for k in self.entities.keys():
-            self.entities[k].on_cell_click(self, cell)
+    @staticmethod
+    def up_right(cell):
+        return Cell(cell.row - 1, cell.column + 1)
 
-    def get_round_bbox(self):
-        yield Cell(self.row - 2, self.column, self.entities)
-        yield Cell(self.row + 2, self.column, self.entities)
-        yield Cell(self.row - 1, self.column - 1, self.entities)
-        yield Cell(self.row - 1, self.column + 1, self.entities)
-        yield Cell(self.row + 1, self.column - 1, self.entities)
-        yield Cell(self.row + 1, self.column + 1, self.entities)
+    @staticmethod
+    def up_left(cell):
+        return Cell(cell.row - 1, cell.column - 1)
+
+    @staticmethod
+    def down(cell):
+        return Cell(cell.row + 2, cell.column)
+
+    @staticmethod
+    def down_right(cell):
+        return Cell(cell.row + 1, cell.column + 1)
+
+    @staticmethod
+    def down_left(cell):
+        return Cell(cell.row + 1, cell.column - 1)
+
+    @staticmethod
+    def round_bbox(cell):
+        yield Cell.up(cell)
+        yield Cell.up_right(cell)
+        yield Cell.down_right(cell)
+        yield Cell.down(cell)
+        yield Cell.down_left(cell)
+        yield Cell.up_left(cell)

@@ -7,26 +7,24 @@ class MapView:
         self.surface = surface
         self.hex_map = hex_map
         self.view_rect = view_rect
+        self.layers = []
+
+    def is_in_view(self, cell):
+        if cell.row not in xrange(self.view_rect.top, self.view_rect.top + self.view_rect.height):
+            return False
+        if cell.column not in xrange(self.view_rect.left, self.view_rect.left + self.view_rect.width):
+            return False
+        return True
 
     def on_click(self, pos):
-        target_cell = self.screen_to_cell(pos)
-        if target_cell:
-            for row in xrange(self.view_rect.top, self.view_rect.top + self.view_rect.height):
-                for col in xrange(self.view_rect.left, self.view_rect.left + self.view_rect.width):
-                    cell = self.hex_map.get_cell(row, col)
-                    if cell:
-                        cell.on_cell_click(target_cell)
+        cell = self.screen_to_cell(pos)
+        if cell:
+            for layer in self.layers:
+                layer.on_cell_click(self, cell)
 
     def draw(self):
-        view_row = 0
-        for row in xrange(self.view_rect.top, self.view_rect.top + self.view_rect.height):
-            view_col = 0
-            for col in xrange(self.view_rect.left, self.view_rect.left + self.view_rect.width):
-                cell = self.hex_map.get_cell(row, col)
-                if cell:
-                    cell.draw(self.surface)
-                    view_col += 1
-            view_row += 1
+        for layer in self.layers:
+            layer.draw(self, self.surface)
 
     def screen_to_cell(self, pos):
         view_row = 0
@@ -46,14 +44,14 @@ class MapView:
             view_row += 1
         return None
 
-    def cell_to_screen(self, row, column):
+    def cell_to_screen(self, cell):
         view_row = 0
         for r in xrange(self.view_rect.top, self.view_rect.top + self.view_rect.height):
             view_col = 0
             for c in xrange(self.view_rect.left, self.view_rect.left + self.view_rect.width):
-                cell = self.hex_map.get_cell(r, c)
-                if cell:
-                    if cell.column == column and cell.row == row:
+                map_cell = self.hex_map.get_cell(r, c)
+                if map_cell:
+                    if map_cell.column == cell.column and map_cell.row == cell.row:
                         px = view_col * globals.HEX_RADIUS * 3 + view_row % 2 * (globals.HEX_RADIUS * 3 / 2)
                         py = view_row * globals.HEX_RADIUS * math.sqrt(3) / 2
 

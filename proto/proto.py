@@ -2,8 +2,8 @@
 import pygame
 from hex_map import HexMap
 from map_view import MapView
-from player import Player
-from camera import Camera
+from ground_layer import GroundLayer
+from player_layer import PlayerLayer
 import globals
 
 black = pygame.Color(0, 0, 0)
@@ -23,11 +23,18 @@ background = background.convert()
 
 hex_map = HexMap(globals.WORLD_WIDTH, globals.WORLD_HEIGHT)
 map_view = MapView(background, hex_map, pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT))
-hex_map.fill_ground()
 
-starting_cell = hex_map.get_cell(globals.CAMERA_ROW, globals.CAMERA_COLUMN)
-starting_cell.entities['camera'] = Camera(map_view)
-starting_cell.entities['player'] = Player()
+ground_layer = GroundLayer(hex_map)
+player_layer = PlayerLayer(hex_map)
+
+ground_layer.fill_ground()
+player_layer.spawn_player()
+
+map_view.layers.append(ground_layer)
+map_view.layers.append(player_layer)
+# starting_cell = hex_map.get_cell(globals.CAMERA_ROW, globals.CAMERA_COLUMN)
+# starting_cell.entities['camera'] = Camera(map_view)
+# starting_cell.entities['player'] = Player()
 
 while not done:
 
