@@ -14,8 +14,8 @@ class GroundLayer(Layer):
                 cell = self.hex_map.get_cell(row, column)
                 if cell:
                     if row < globals.CAMERA_ROW or row > globals.WORLD_WIDTH - globals.CAMERA_ROW:
-                        self.entities.append(Ground(cell, GroundType.GRASS))
-                    elif column < globals.CAMERA_COLUMN or column > globals.WORLD_HEIGHT - globals.CAMERA_COLUMN:
-                        self.entities.append(Ground(cell, GroundType.GRASS))
-                    else:
                         self.entities.append(Ground(cell, GroundType.WATER))
+                    elif column < globals.CAMERA_COLUMN or column > globals.WORLD_HEIGHT - globals.CAMERA_COLUMN:
+                        self.entities.append(Ground(cell, GroundType.WATER))
+                    else:
+                        self.entities.append(Ground(cell, GroundType.GRASS))

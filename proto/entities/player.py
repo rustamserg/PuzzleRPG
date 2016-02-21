@@ -1,6 +1,7 @@
 import pygame
 from core.cell import Cell
 from core.entity import Entity
+from entities.ground import GroundType
 
 
 class Player(Entity):
@@ -17,5 +18,10 @@ class Player(Entity):
     def on_cell_click(self, map_view, cell):
         for c in Cell.round_bbox(self.cell):
             if c == cell:
-                map_view.move_view(cell)
-                self.cell = cell
+                ground_layer = map_view.get_layer('GroundLayer')
+                if ground_layer:
+                    for ent in ground_layer.entities:
+                        if ent.cell == cell and ent.ground_type == GroundType.GRASS:
+                            map_view.move_view(cell)
+                            self.cell = cell
+                            break

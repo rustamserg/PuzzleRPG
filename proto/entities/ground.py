@@ -32,9 +32,9 @@ class Ground(Entity):
                 y = py + globals.HEX_RADIUS * math.sin(math.radians((ang + 1) * 60))
                 points.append([x, y])
             if self.ground_type == GroundType.GRASS:
-                color = blue
-            elif self.ground_type == GroundType.WATER:
                 color = green
+            elif self.ground_type == GroundType.WATER:
+                color = blue
             else:
                 color = black
             pygame.draw.polygon(surface, color, points)

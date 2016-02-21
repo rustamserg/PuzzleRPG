@@ -31,11 +31,8 @@ player_layer = PlayerLayer(hex_map)
 ground_layer.fill_ground()
 player_layer.spawn_player()
 
-map_view.layers.append(ground_layer)
-map_view.layers.append(player_layer)
-# starting_cell = hex_map.get_cell(globals.CAMERA_ROW, globals.CAMERA_COLUMN)
-# starting_cell.entities['camera'] = Camera(map_view)
-# starting_cell.entities['player'] = Player()
+map_view.add_layer(ground_layer)
+map_view.add_layer(player_layer)
 
 while not done:
 

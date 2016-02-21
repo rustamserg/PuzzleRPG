@@ -10,6 +10,15 @@ class MapView:
         self.view_rect = view_rect
         self.layers = []
 
+    def add_layer(self, layer):
+        self.layers.append(layer)
+
+    def get_layer(self, name):
+        for layer in self.layers:
+            if layer.name == name:
+                return layer
+        return None
+
     def is_in_view(self, cell):
         if cell.row not in xrange(self.view_rect.top, self.view_rect.top + self.view_rect.height):
             return False
