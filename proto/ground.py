@@ -29,7 +29,7 @@ class Ground(Entity):
             for ang in range(6):
                 x = px + globals.HEX_RADIUS * math.cos(math.radians((ang + 1) * 60))
                 y = py + globals.HEX_RADIUS * math.sin(math.radians((ang + 1) * 60))
-                points.append([x + globals.VIEW_OFFSET[0], y + globals.VIEW_OFFSET[1]])
+                points.append([x, y])
             if self.ground_type == GroundType.GRASS:
                 color = blue
             elif self.ground_type == GroundType.WATER:
