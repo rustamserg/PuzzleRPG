@@ -18,9 +18,6 @@ class Button(Entity):
             if self.on_click:
                 self.on_click(world)
 
-    def set_on_click(self, on_click):
-        self.on_click = on_click
-
     def draw(self, world, surface):
         label = self.font.render(self.caption, 1, (255, 255, 0))
         self.button_rect = pygame.Rect(self.pos[0], self.pos[1], self.width, self.height)
