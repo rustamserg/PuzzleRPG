@@ -7,3 +7,6 @@ class Entity:
 
     def on_cell_click(self, world, cell):
         pass
+
+    def on_pos_click(self, pos):
+        pass

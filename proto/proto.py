@@ -5,13 +5,14 @@ import globals
 from hex_map import HexMap
 from layers.ground_layer import GroundLayer
 from layers.player_layer import PlayerLayer
+from layers.ui_layer import UILayer
 from world import World
 
 black = pygame.Color(0, 0, 0)
 
 pygame.init()
 
-size = [500, 600]
+size = [globals.WINDOW_WIDTH, globals.WINDOW_HEIGHT]
 screen = pygame.display.set_mode(size)
 
 pygame.display.set_caption("HEX")
@@ -27,12 +28,15 @@ world = World(background, hex_map, pygame.Rect(0, 0, globals.VIEW_WIDTH, globals
 
 ground_layer = GroundLayer(hex_map)
 player_layer = PlayerLayer(hex_map)
+ui_layer = UILayer()
 
 ground_layer.fill_ground()
 player_layer.spawn_player()
+ui_layer.fill_ui()
 
 world.add_layer(ground_layer)
 world.add_layer(player_layer)
+world.add_layer(ui_layer)
 
 while not done:
 
