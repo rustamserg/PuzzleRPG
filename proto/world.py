@@ -3,21 +3,44 @@ import math
 import globals
 
 
+class Turn:
+    def __init__(self):
+        pass
+
+    AI = 'AI'
+    PLAYER = 'Player'
+
+
 class World:
     def __init__(self, surface, hex_map, camera_view):
         self.surface = surface
         self.hex_map = hex_map
         self.camera_view = camera_view
         self.layers = []
+        self.turn = Turn.PLAYER
 
     def add_layer(self, layer):
         self.layers.append(layer)
 
-    def get_layer(self, name):
+    def get_layer(self, tag):
         for layer in self.layers:
-            if layer.name == name:
+            if layer.tag == tag:
                 return layer
         return None
+
+    def init(self):
+        for layer in self.layers:
+            layer.init()
+
+    def start(self):
+        for layer in self.layers:
+            layer.start(self)
+
+    def end_turn(self):
+        if self.turn == Turn.PLAYER:
+            self.turn = Turn.AI
+        else:
+            self.turn = Turn.PLAYER
 
     def is_in_camera(self, cell):
         if cell.row not in xrange(self.camera_view.top, self.camera_view.top + self.camera_view.height):
@@ -36,13 +59,16 @@ class World:
 
     def on_click(self, pos):
         cell = self.screen_to_cell(pos)
-        if cell:
-            for layer in self.layers:
-                layer.on_cell_click(self, cell)
+        for layer in self.layers:
+            layer.on_click(self, pos, cell)
 
     def draw(self):
         for layer in self.layers:
             layer.draw(self, self.surface)
+
+    def update(self):
+        for layer in self.layers:
+            layer.update(self, self.turn)
 
     def screen_to_cell(self, pos):
         view_row = 0

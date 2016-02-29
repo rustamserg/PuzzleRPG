@@ -6,6 +6,7 @@ from hex_map import HexMap
 from layers.ground_layer import GroundLayer
 from layers.player_layer import PlayerLayer
 from layers.ui_layer import UILayer
+from layers.logic_layer import LogicLayer
 from world import World
 
 black = pygame.Color(0, 0, 0)
@@ -26,17 +27,13 @@ background = background.convert()
 hex_map = HexMap(globals.WORLD_WIDTH, globals.WORLD_HEIGHT)
 world = World(background, hex_map, pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT))
 
-ground_layer = GroundLayer(hex_map)
-player_layer = PlayerLayer(hex_map)
-ui_layer = UILayer()
+world.add_layer(GroundLayer(hex_map))
+world.add_layer(PlayerLayer(hex_map))
+world.add_layer(UILayer())
+world.add_layer(LogicLayer())
 
-ground_layer.fill_ground()
-player_layer.spawn_player()
-ui_layer.fill_ui()
-
-world.add_layer(ground_layer)
-world.add_layer(player_layer)
-world.add_layer(ui_layer)
+world.init()
+world.start()
 
 while not done:
 
@@ -50,6 +47,7 @@ while not done:
             pos = pygame.mouse.get_pos()
             world.on_click(pos)
 
+    world.update()
     world.draw()
 
     screen.blit(background, (0, 0))

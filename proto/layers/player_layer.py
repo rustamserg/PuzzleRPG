@@ -8,6 +8,6 @@ class PlayerLayer(Layer):
         Layer.__init__(self)
         self.hex_map = hex_map
 
-    def spawn_player(self):
+    def init(self):
         spawn_cell = self.hex_map.get_cell(globals.CAMERA_ROW, globals.CAMERA_COLUMN)
-        self.entities.append(Player(spawn_cell))
+        self.add_entity(Player(spawn_cell))
