@@ -2,6 +2,7 @@ import pygame
 from core.cell import Cell
 from core.entity import Entity
 from entities.ground import GroundType
+from world import TurnType
 
 
 class Player(Entity):
@@ -16,6 +17,9 @@ class Player(Entity):
             pygame.draw.circle(surface, pygame.Color(0, 0, 0), (px, py), 10, 1)
 
     def on_cell_click(self, world, cell):
+        if world.turn == TurnType.AI:
+            return
+
         for c in Cell.round_bbox(self.cell):
             if c == cell:
                 ground_layer = world.get_layer('GroundLayer')
@@ -24,4 +28,5 @@ class Player(Entity):
                         if ent.cell == cell and ent.ground_type == GroundType.GRASS:
                             world.move_camera(cell)
                             self.cell = cell
+                            world.end_turn()
                             break

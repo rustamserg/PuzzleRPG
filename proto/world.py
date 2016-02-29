@@ -3,7 +3,7 @@ import math
 import globals
 
 
-class Turn:
+class TurnType:
     def __init__(self):
         pass
 
@@ -17,7 +17,7 @@ class World:
         self.hex_map = hex_map
         self.camera_view = camera_view
         self.layers = []
-        self.turn = Turn.PLAYER
+        self.turn = TurnType.PLAYER
 
     def add_layer(self, layer):
         self.layers.append(layer)
@@ -37,10 +37,10 @@ class World:
             layer.start(self)
 
     def end_turn(self):
-        if self.turn == Turn.PLAYER:
-            self.turn = Turn.AI
+        if self.turn == TurnType.PLAYER:
+            self.turn = TurnType.AI
         else:
-            self.turn = Turn.PLAYER
+            self.turn = TurnType.PLAYER
 
     def is_in_camera(self, cell):
         if cell.row not in xrange(self.camera_view.top, self.camera_view.top + self.camera_view.height):

@@ -6,7 +6,7 @@ from hex_map import HexMap
 from layers.ground_layer import GroundLayer
 from layers.player_layer import PlayerLayer
 from layers.ui_layer import UILayer
-from layers.logic_layer import LogicLayer
+from layers.ai_layer import AILayer
 from world import World
 
 black = pygame.Color(0, 0, 0)
@@ -30,7 +30,7 @@ world = World(background, hex_map, pygame.Rect(0, 0, globals.VIEW_WIDTH, globals
 world.add_layer(GroundLayer(hex_map))
 world.add_layer(PlayerLayer(hex_map))
 world.add_layer(UILayer())
-world.add_layer(LogicLayer())
+world.add_layer(AILayer())
 
 world.init()
 world.start()
