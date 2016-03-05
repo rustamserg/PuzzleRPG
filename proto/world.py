@@ -1,3 +1,4 @@
+import os
 import pygame
 import math
 import globals
@@ -18,6 +19,7 @@ class World:
         self.camera_view = camera_view
         self.layers = []
         self.turn = TurnType.PLAYER
+        self.tiles = pygame.image.load(os.path.join('data', 'tiles.png')).convert_alpha()
 
     def add_layer(self, layer):
         self.layers.append(layer)

@@ -3,6 +3,7 @@ from core.cell import Cell
 from core.entity import Entity
 from entities.ground import GroundType
 from world import TurnType
+import globals
 
 
 class Player(Entity):
@@ -13,8 +14,9 @@ class Player(Entity):
     def draw(self, world, surface):
         if world.is_in_camera(self.cell):
             px, py = world.cell_to_screen(self.cell)
-            pygame.draw.circle(surface, pygame.Color(255, 0, 0), (px, py), 10)
-            pygame.draw.circle(surface, pygame.Color(0, 0, 0), (px, py), 10, 1)
+            dest = (px - globals.HEX_RADIUS/2, py - globals.HEX_RADIUS/2)
+            area = pygame.Rect(1*32, 2*32, 32, 32)
+            surface.blit(world.tiles, dest, area)
 
     def on_cell_click(self, world, cell):
         if world.turn == TurnType.AI:
