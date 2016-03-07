@@ -107,3 +107,8 @@ class World:
                     view_col += 1
             view_row += 1
         return None
+
+    def cell_to_ul_screen(self, cell):
+        px, py = self.cell_to_screen(cell)
+        return px - globals.HEX_RADIUS/2, py - globals.HEX_RADIUS/2
+
