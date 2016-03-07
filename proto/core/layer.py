@@ -2,7 +2,7 @@ class Layer:
     def __init__(self):
         self.entities = []
 
-    def init(self):
+    def init(self, world):
         pass
 
     def start(self, world):

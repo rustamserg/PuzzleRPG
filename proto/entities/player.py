@@ -19,13 +19,11 @@ class Player(Entity):
         if world.turn == TurnType.AI:
             return
 
+        ground_layer = world.get_layer('GroundLayer')
         for c in Cell.round_bbox(self.cell):
             if c == cell:
-                ground_layer = world.get_layer('GroundLayer')
-                if ground_layer:
-                    for ent in ground_layer.entities:
-                        if ent.cell == cell and ent.ground_type == GroundType.GRASS:
-                            world.move_camera(cell)
-                            self.cell = cell
-                            world.end_turn()
-                            break
+                if ground_layer.can_move_to_cell(cell):
+                    world.move_camera(cell)
+                    self.cell = cell
+                    world.end_turn()
+                    break

@@ -34,7 +34,7 @@ class World:
 
     def init(self):
         for layer in self.layers:
-            layer.init()
+            layer.init(self)
 
     def start(self):
         for layer in self.layers:

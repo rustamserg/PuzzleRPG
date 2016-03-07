@@ -27,10 +27,10 @@ background = background.convert()
 hex_map = HexMap(globals.WORLD_WIDTH, globals.WORLD_HEIGHT)
 world = World(background, hex_map, pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT))
 
-world.add_layer(GroundLayer(hex_map))
-world.add_layer(PlayerLayer(hex_map))
-world.add_layer(UILayer())
+world.add_layer(GroundLayer())
 world.add_layer(AILayer())
+world.add_layer(PlayerLayer())
+world.add_layer(UILayer())
 
 world.init()
 world.start()
