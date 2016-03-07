@@ -11,7 +11,8 @@ class AILayer(Layer):
         btn = ui_layer.get_entity('btn_end')
         btn.on_click = self.on_btn_end
 
-    def on_btn_end(self, world):
+    @staticmethod
+    def on_btn_end(world):
         if world.turn == TurnType.PLAYER:
             return
         world.end_turn()

@@ -22,6 +22,6 @@ class Button(Entity):
         label = self.font.render(self.caption, 1, (255, 255, 0))
         self.button_rect = pygame.Rect(self.pos[0], self.pos[1], self.width, self.height)
         pygame.draw.rect(surface, pygame.Color(255, 255, 255), self.button_rect, 1)
-        lrx = self.pos[0] + (self.width - label.get_width())/2
-        lry = self.pos[1] + (self.height - label.get_height())/2
+        lrx = self.pos[0] + (self.width - label.get_width()) / 2
+        lry = self.pos[1] + (self.height - label.get_height()) / 2
         surface.blit(label, (lrx, lry))

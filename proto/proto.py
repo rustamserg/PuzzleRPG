@@ -3,10 +3,10 @@ import pygame
 
 import globals
 from hex_map import HexMap
+from layers.ai_layer import AILayer
 from layers.ground_layer import GroundLayer
 from layers.player_layer import PlayerLayer
 from layers.ui_layer import UILayer
-from layers.ai_layer import AILayer
 from world import World
 
 black = pygame.Color(0, 0, 0)

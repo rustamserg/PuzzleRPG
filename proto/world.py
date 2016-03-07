@@ -1,6 +1,8 @@
-import os
-import pygame
 import math
+import os
+
+import pygame
+
 import globals
 
 
@@ -110,5 +112,4 @@ class World:
 
     def cell_to_ul_screen(self, cell):
         px, py = self.cell_to_screen(cell)
-        return px - globals.HEX_RADIUS/2, py - globals.HEX_RADIUS/2
-
+        return px - globals.HEX_RADIUS / 2, py - globals.HEX_RADIUS / 2
