@@ -32,6 +32,10 @@ class World:
                 return layer
         return None
 
+    def enable_layers(self, enable=True):
+        for layer in self.layers:
+            layer.enable = enable
+
     def init(self):
         for layer in self.layers:
             layer.init(self)

@@ -7,6 +7,7 @@ from layers.ai_layer import AILayer
 from layers.ground_layer import GroundLayer
 from layers.player_layer import PlayerLayer
 from layers.ui_layer import UILayer
+from layers.inventory_layer import InventoryLayer
 from world import World
 
 black = pygame.Color(0, 0, 0)
@@ -31,6 +32,7 @@ world.add_layer(GroundLayer())
 world.add_layer(AILayer())
 world.add_layer(PlayerLayer())
 world.add_layer(UILayer())
+world.add_layer(InventoryLayer())
 
 world.init()
 world.start()

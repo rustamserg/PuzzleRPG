@@ -9,10 +9,16 @@ class UILayer(Layer):
         Layer.__init__(self)
 
     def init(self, world):
-        self.add_entity(Button((globals.VIEW_OFFSET[0], globals.WINDOW_HEIGHT - 100), 'End turn'), 'btn_end')
+        btn_inv = Button((globals.VIEW_OFFSET[0], globals.WINDOW_HEIGHT - 100), 'Inventory')
+        btn_inv.on_click = self.open_inventory
+        self.add_entity(btn_inv)
         self.add_entity(Label((globals.VIEW_OFFSET[0], globals.WINDOW_HEIGHT - 40), 'Status'), 'lbl_status')
 
     def update(self, world, turn):
         lbl = self.get_entity('lbl_status')
         lbl.text = 'Turn: %s' % turn
 
+    def open_inventory(self, world):
+        world.enable_layers(False)
+        inv_layer = world.get_layer('InventoryLayer')
+        inv_layer.enable = True

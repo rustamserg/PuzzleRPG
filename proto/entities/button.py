@@ -3,7 +3,7 @@ from core.entity import Entity
 
 
 class Button(Entity):
-    def __init__(self, pos, caption, width=100, height=40):
+    def __init__(self, pos, caption, width=120, height=40):
         Entity.__init__(self)
         self.pos = pos
         self.width = width
