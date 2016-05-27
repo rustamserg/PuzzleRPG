@@ -8,6 +8,7 @@ class Player(Entity):
     def __init__(self, cell):
         Entity.__init__(self)
         self.cell = cell
+        self.inventory = []
 
     def draw(self, world, surface):
         if world.is_in_camera(self.cell):
@@ -19,10 +20,17 @@ class Player(Entity):
             return
 
         ground_layer = world.get_layer('GroundLayer')
+        items_layer = world.get_layer('ItemsLayer')
         for c in Cell.round_bbox(self.cell):
             if c == cell:
-                if ground_layer.can_move_to_cell(cell):
-                    world.move_camera(cell)
-                    self.cell = cell
+                item = items_layer.get_item_from_cell(cell)
+                if item:
+                    item.on_action(world, self)
                     world.end_turn()
                     break
+                else:
+                    if ground_layer.can_move_to_cell(cell):
+                        world.move_camera(cell)
+                        self.cell = cell
+                        world.end_turn()
+                        break

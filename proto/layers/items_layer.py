@@ -1,6 +1,6 @@
 import random
 from core.layer import Layer
-from items.item import Item
+from items.fruit import Fruit
 
 
 class ItemsLayer(Layer):
@@ -19,5 +19,12 @@ class ItemsLayer(Layer):
             cell = world.hex_map.get_cell(row, column)
             if cell is not None:
                 if ground_layer.can_move_to_cell(cell):
-                    self.add_entity(Item(cell, 'item_01'))
-                    to_spawn -= 1
+                    if self.get_item_from_cell(cell) is None:
+                        self.add_entity(Fruit(cell), 'fruit_%i_%i' % (row, column))
+                        to_spawn -= 1
+
+    def get_item_from_cell(self, cell):
+        for ent in self.entities:
+            if ent.cell == cell:
+                return ent
+        return None

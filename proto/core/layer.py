@@ -22,6 +22,12 @@ class Layer:
             if entity.tag == tag:
                 return entity
 
+    def del_entity(self, tag):
+        for entity in self.entities:
+            if entity.tag == tag:
+                self.entities.remove(entity)
+                return
+
     def on_click(self, world, pos, cell):
         if not self.enable:
             return
@@ -38,9 +44,19 @@ class Layer:
         for entity in self.entities:
             entity.draw(world, surface)
 
+        self.post_draw(world, surface)
+
+    def post_draw(self, world, surface):
+        pass
+
     def update(self, world, turn):
         if not self.enable:
             return
 
         for entity in self.entities:
             entity.update(world, turn)
+
+        self.post_update(world, turn)
+
+    def post_update(self, world, turn):
+        pass

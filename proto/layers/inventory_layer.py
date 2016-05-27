@@ -1,6 +1,7 @@
 import globals
 from core.layer import Layer
 from entities.button import Button
+from data import tiles_data
 
 
 class InventoryLayer(Layer):
@@ -19,7 +20,22 @@ class InventoryLayer(Layer):
         btn_inv.on_click = self.close_inventory
         self.add_entity(btn_inv)
 
+    def post_draw(self, world, surface):
+        player_layer = world.get_layer('PlayerLayer')
+        player = player_layer.get_entity('player')
+
+        col, row = 0, 0
+        for item in player.inventory:
+            px = globals.VIEW_OFFSET[0] + col * globals.INVENTORY_CELL_SIZE + globals.HEX_RADIUS/2
+            py = globals.VIEW_OFFSET[1] + row * globals.INVENTORY_CELL_SIZE + globals.HEX_RADIUS/2
+            surface.blit(world.tiles, (px, py), tiles_data.TILES[item.tile_name])
+            col += 1
+            if col == globals.INVENTORY_WIDTH:
+                col = 0
+                row += 1
+                if row == globals.INVENTORY_HEIGHT:
+                    row = 0
+
     def close_inventory(self, world):
         world.enable_layers()
         self.enable = False
-
