@@ -1,6 +1,5 @@
 from core.cell import Cell
 from core.entity import Entity
-from entities.ground import GroundType
 from world import TurnType
 from data import tiles_data
 

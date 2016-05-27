@@ -8,6 +8,7 @@ from layers.ground_layer import GroundLayer
 from layers.player_layer import PlayerLayer
 from layers.ui_layer import UILayer
 from layers.inventory_layer import InventoryLayer
+from layers.items_layer import ItemsLayer
 from world import World
 
 black = pygame.Color(0, 0, 0)
@@ -29,6 +30,7 @@ hex_map = HexMap(globals.WORLD_WIDTH, globals.WORLD_HEIGHT)
 world = World(background, hex_map, pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT))
 
 world.add_layer(GroundLayer())
+world.add_layer(ItemsLayer())
 world.add_layer(AILayer())
 world.add_layer(PlayerLayer())
 world.add_layer(UILayer())
