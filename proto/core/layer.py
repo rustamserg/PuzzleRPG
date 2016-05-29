@@ -44,19 +44,9 @@ class Layer:
         for entity in self.entities:
             entity.draw(world, surface)
 
-        self.post_draw(world, surface)
-
-    def post_draw(self, world, surface):
-        pass
-
     def update(self, world, turn):
         if not self.enable:
             return
 
         for entity in self.entities:
             entity.update(world, turn)
-
-        self.post_update(world, turn)
-
-    def post_update(self, world, turn):
-        pass

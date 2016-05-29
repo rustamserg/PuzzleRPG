@@ -8,7 +8,6 @@ class Player(Entity):
     def __init__(self, cell):
         Entity.__init__(self)
         self.cell = cell
-        self.inventory = []
 
     def draw(self, world, surface):
         if world.is_in_camera(self.cell):
@@ -21,6 +20,7 @@ class Player(Entity):
 
         ground_layer = world.get_layer('GroundLayer')
         items_layer = world.get_layer('ItemsLayer')
+
         for c in Cell.round_bbox(self.cell):
             if c == cell:
                 item = items_layer.get_item_from_cell(cell)
