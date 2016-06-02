@@ -47,8 +47,10 @@ class World:
     def end_turn(self):
         if self.turn == TurnType.PLAYER:
             self.turn = TurnType.AI
+            self.surface.set_alpha(100)
         else:
             self.turn = TurnType.PLAYER
+            self.surface.set_alpha(255)
 
     def is_in_camera(self, cell):
         if cell.row not in xrange(self.camera_view.top, self.camera_view.top + self.camera_view.height):
