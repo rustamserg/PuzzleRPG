@@ -26,7 +26,7 @@ class Player(Entity):
             if c == cell:
                 item = items_layer.get_item_from_cell(cell)
                 if item:
-                    hand_item = player_layer.get_entity('hand_item')
+                    hand_item = player_layer.get_first_entity('hand_item')
                     by_entity = hand_item if hand_item else self
                     item.on_action(world, by_entity)
                     world.end_turn()

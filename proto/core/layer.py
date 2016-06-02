@@ -17,16 +17,14 @@ class Layer:
         entity.tag = tag if tag else entity.tag
         self.entities.append(entity)
 
-    def get_entity(self, tag):
-        for entity in self.entities:
-            if entity.tag == tag:
-                return entity
+    def get_entities(self, tag):
+        return [ent for ent in self.entities if ent.tag == tag]
+
+    def get_first_entity(self, tag):
+        return next((ent for ent in self.entities if ent.tag == tag), None)
 
     def del_entity(self, tag):
-        for entity in self.entities:
-            if entity.tag == tag:
-                self.entities.remove(entity)
-                return
+        self.entities = [ent for ent in self.entities if ent.tag != tag]
 
     def on_click(self, world, pos, cell):
         if not self.enable:

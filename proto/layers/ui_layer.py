@@ -15,10 +15,11 @@ class UILayer(Layer):
         self.add_entity(Label((globals.VIEW_OFFSET[0], globals.WINDOW_HEIGHT - 40), 'Status'), 'lbl_status')
 
     def update(self, world, turn):
-        lbl = self.get_entity('lbl_status')
+        lbl = self.get_first_entity('lbl_status')
         lbl.text = 'Turn: %s' % turn
 
-    def open_inventory(self, world):
+    @staticmethod
+    def open_inventory(world):
         world.enable_layers(False)
         inv_layer = world.get_layer('InventoryLayer')
         inv_layer.enable = True

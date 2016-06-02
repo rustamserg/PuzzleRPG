@@ -13,7 +13,7 @@ class PlayerLayer(Layer):
         self.add_entity(Player(spawn_cell), 'player')
 
     def take_to_hand(self, world, item):
-        hand_item = self.get_entity('hand_item')
+        hand_item = self.get_first_entity('hand_item')
         if not hand_item:
             self.add_entity(item, 'hand_item')
             item.location = ItemLocation.PLAYER
@@ -29,7 +29,7 @@ class PlayerLayer(Layer):
                 inv_layer.add_to_inventory(hand_item)
 
     def use_item(self, world, item):
-        player = self.get_entity('player')
+        player = self.get_first_entity('player')
         item.on_use(world, player)
         if item.count == 0:
             self.del_entity('hand_item')
