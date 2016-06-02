@@ -1,9 +1,9 @@
 from items.item import Item
 
 
-class Fruit(Item):
+class Wood(Item):
     def __init__(self, cell):
-        Item.__init__(self, cell, 'fruit', 'fruit_01')
+        Item.__init__(self, cell, 'wood', 'wood_01')
 
     def on_action(self, world, by_entity):
         if by_entity.tag == 'player':

@@ -31,7 +31,7 @@ class InventoryLayer(Layer):
         for row in range(globals.INVENTORY_HEIGHT):
             for col in range(globals.INVENTORY_WIDTH):
                 inv_cell = self.get_entity('cell_%i_%i' % (row, col))
-                if inv_cell.item and inv_cell.item.type == item.type:
+                if inv_cell.item and inv_cell.item.archetype == item.archetype:
                     inv_cell.item.count += 1
                     return
 
@@ -42,6 +42,7 @@ class InventoryLayer(Layer):
                     inv_cell.item = item
                     item.location = ItemLocation.INVENTORY
                     item.inv_cell = Cell(row, col)
+                    item.tag = 'item_%i_%i' % (row, col)
                     self.add_entity(item, item.tag)
                     return
 

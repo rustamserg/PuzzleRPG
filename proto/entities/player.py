@@ -20,12 +20,15 @@ class Player(Entity):
 
         ground_layer = world.get_layer('GroundLayer')
         items_layer = world.get_layer('ItemsLayer')
+        player_layer = world.get_layer('PlayerLayer')
 
         for c in Cell.round_bbox(self.cell):
             if c == cell:
                 item = items_layer.get_item_from_cell(cell)
                 if item:
-                    item.on_action(world, self)
+                    hand_item = player_layer.get_entity('hand_item')
+                    by_entity = hand_item if hand_item else self
+                    item.on_action(world, by_entity)
                     world.end_turn()
                     break
                 else:

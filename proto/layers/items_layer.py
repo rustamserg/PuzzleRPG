@@ -1,6 +1,7 @@
 import random
 from core.layer import Layer
 from items.fruit import Fruit
+from items.wood import Wood
 
 
 class ItemsLayer(Layer):
@@ -20,7 +21,7 @@ class ItemsLayer(Layer):
             if cell is not None:
                 if ground_layer.can_move_to_cell(cell):
                     if self.get_item_from_cell(cell) is None:
-                        self.add_entity(Fruit(cell), 'fruit_%i_%i' % (row, column))
+                        self.add_entity(ItemsLayer.create_item(cell), 'item_%i_%i' % (row, column))
                         to_spawn -= 1
 
     def get_item_from_cell(self, cell):
@@ -28,3 +29,11 @@ class ItemsLayer(Layer):
             if ent.ground_cell == cell:
                 return ent
         return None
+
+    @staticmethod
+    def create_item(cell):
+        w = random.randint(1, 100)
+        if w < 50:
+            return Fruit(cell)
+        else:
+            return Wood(cell)

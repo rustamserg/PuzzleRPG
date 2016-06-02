@@ -13,8 +13,8 @@ class Layer:
     def tag(self):
         return str(self.__class__.__name__)
 
-    def add_entity(self, entity, tag=''):
-        entity.tag = tag
+    def add_entity(self, entity, tag=None):
+        entity.tag = tag if tag else entity.tag
         self.entities.append(entity)
 
     def get_entity(self, tag):
