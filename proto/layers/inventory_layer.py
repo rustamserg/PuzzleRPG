@@ -22,6 +22,11 @@ class InventoryLayer(Layer):
         btn_inv.on_click = self.close_inventory
         self.add_entity(btn_inv)
 
+    def del_from_inventory(self, item):
+        inv_cell = self.get_entity('cell_%i_%i' % (item.inv_cell.row, item.inv_cell.column))
+        inv_cell.item = None
+        self.del_entity(item.tag)
+
     def add_to_inventory(self, item):
         for row in range(globals.INVENTORY_HEIGHT):
             for col in range(globals.INVENTORY_WIDTH):

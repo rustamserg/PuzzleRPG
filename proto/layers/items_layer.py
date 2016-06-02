@@ -12,7 +12,7 @@ class ItemsLayer(Layer):
 
     def spawn(self, world):
         ground_layer = world.get_layer('GroundLayer')
-        to_spawn = 50
+        to_spawn = 30
         while to_spawn > 0:
             row = random.randint(1, world.hex_map.height - 1)
             column = random.randint(1, world.hex_map.width - 1)

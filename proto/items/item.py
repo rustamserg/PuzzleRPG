@@ -10,12 +10,12 @@ class ItemLocation:
 
     GROUND = 1
     INVENTORY = 2
+    PLAYER = 3
 
 
 class Item(Entity):
     def __init__(self, cell, tile_name):
         Entity.__init__(self)
-        self.type = str(self.__class__.__name__)
         self.ground_cell = cell
         self.inv_cell = None
         self.count = 1
@@ -29,13 +29,29 @@ class Item(Entity):
                 px, py = world.cell_to_ul_screen(self.ground_cell)
                 surface.blit(world.tiles, (px, py), tiles_data.TILES[self.tile_name])
         elif self.location == ItemLocation.INVENTORY:
-            px = globals.VIEW_OFFSET[0] + self.inv_cell.column * globals.INVENTORY_CELL_SIZE
-            py = globals.VIEW_OFFSET[1] + self.inv_cell.row * globals.INVENTORY_CELL_SIZE
-            px += globals.HEX_RADIUS / 2
-            py += globals.HEX_RADIUS / 2
+            px = globals.VIEW_OFFSET[0] + self.inv_cell.column * globals.INVENTORY_CELL_SIZE + globals.HEX_RADIUS / 2
+            py = globals.VIEW_OFFSET[1] + self.inv_cell.row * globals.INVENTORY_CELL_SIZE + globals.HEX_RADIUS / 2
             surface.blit(world.tiles, (px, py), tiles_data.TILES[self.tile_name])
             label = self.font.render(str(self.count), 1, (255, 255, 0))
             surface.blit(label, (px + globals.HEX_RADIUS, py + globals.HEX_RADIUS))
+        elif self.location == ItemLocation.PLAYER:
+            px, py = globals.WINDOW_WIDTH - 180, globals.WINDOW_HEIGHT - 100
+            surface.blit(world.tiles, (px, py), tiles_data.TILES[self.tile_name])
+            label = self.font.render(str(self.count), 1, (255, 255, 0))
+            surface.blit(label, (px + globals.HEX_RADIUS, py + globals.HEX_RADIUS))
+
+    def on_pos_click(self, world, pos):
+        if self.location == ItemLocation.INVENTORY:
+            px = globals.VIEW_OFFSET[0] + self.inv_cell.column * globals.INVENTORY_CELL_SIZE + globals.HEX_RADIUS / 2
+            py = globals.VIEW_OFFSET[1] + self.inv_cell.row * globals.INVENTORY_CELL_SIZE + globals.HEX_RADIUS / 2
+            rect = pygame.Rect(px, py, globals.HEX_RADIUS, globals.HEX_RADIUS)
+            if rect.collidepoint(pos):
+                player_layer = world.get_layer('PlayerLayer')
+                inv_layer = world.get_layer('InventoryLayer')
+
+                inv_layer.del_from_inventory(self)
+                player_layer.add_entity(self)
+                self.location = ItemLocation.PLAYER
 
     def on_action(self, world, by_entity):
         pass
