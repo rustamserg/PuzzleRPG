@@ -1,7 +1,7 @@
 import random
 from core.layer import Layer
-from items.fruit import Fruit
-from items.wood import Wood
+from items.test_item_01 import TestItem01
+from items.test_item_02 import TestItem02
 
 
 class ItemsLayer(Layer):
@@ -34,6 +34,6 @@ class ItemsLayer(Layer):
     def create_item(cell):
         w = random.randint(1, 100)
         if w < 50:
-            return Fruit(cell)
+            return TestItem01(cell)
         else:
-            return Wood(cell)
+            return TestItem02(cell)
