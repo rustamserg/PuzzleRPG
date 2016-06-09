@@ -5,13 +5,11 @@ class TestItem02(Item):
     def __init__(self, cell):
         Item.__init__(self, cell, 'test_item_02', 'test_item_02')
 
-    def on_action(self, world, by_entity):
-        if by_entity.tag == 'player':
-            items_layer = world.get_layer('ItemsLayer')
-            inv_layer = world.get_layer('InventoryLayer')
-
-            items_layer.del_entity(self.tag)
-            inv_layer.add_to_inventory(self)
-
     def on_use(self, world, player):
         self.count -= 1
+
+    def on_action(self, world, by_entity):
+        player_layer = world.get_layer('PlayerLayer')
+
+        if by_entity.archetype == 'test_item_01':
+            player_layer.pick_up_item(world, self)

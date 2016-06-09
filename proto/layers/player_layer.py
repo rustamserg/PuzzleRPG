@@ -2,6 +2,7 @@ import globals
 from core.layer import Layer
 from entities.player import Player
 from items.item import ItemLocation
+from items.hand_item import HandItem
 
 
 class PlayerLayer(Layer):
@@ -11,8 +12,9 @@ class PlayerLayer(Layer):
     def init(self, world):
         spawn_cell = world.hex_map.get_cell(globals.CAMERA_ROW, globals.CAMERA_COLUMN)
         self.add_entity(Player(spawn_cell), 'player')
+        self.take_item(world, HandItem(spawn_cell))
 
-    def take_to_hand(self, world, item):
+    def take_item(self, world, item):
         hand_item = self.get_first_entity('hand_item')
         if not hand_item:
             self.add_entity(item, 'hand_item')
@@ -33,3 +35,10 @@ class PlayerLayer(Layer):
         item.on_use(world, player)
         if item.count == 0:
             self.del_entity('hand_item')
+
+    @staticmethod
+    def pick_up_item(world, item):
+        items_layer = world.get_layer('ItemsLayer')
+        inv_layer = world.get_layer('InventoryLayer')
+        items_layer.del_entity(item.tag)
+        inv_layer.add_to_inventory(item)

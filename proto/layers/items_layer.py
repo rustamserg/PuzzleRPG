@@ -1,5 +1,7 @@
 import random
+import globals
 from core.layer import Layer
+from core.cell import Cell
 from items.test_item_01 import TestItem01
 from items.test_item_02 import TestItem02
 
@@ -13,6 +15,11 @@ class ItemsLayer(Layer):
 
     def spawn(self, world):
         ground_layer = world.get_layer('GroundLayer')
+
+        spawn_cell = world.hex_map.get_cell(globals.CAMERA_ROW, globals.CAMERA_COLUMN)
+        spawn_cell = Cell.down_right(spawn_cell)
+        self.add_entity(TestItem01(spawn_cell), 'item_%i_%i' % (spawn_cell.row, spawn_cell.column))
+
         to_spawn = 30
         while to_spawn > 0:
             row = random.randint(1, world.hex_map.height - 1)
@@ -21,7 +28,7 @@ class ItemsLayer(Layer):
             if cell is not None:
                 if ground_layer.can_move_to_cell(cell):
                     if self.get_item_from_cell(cell) is None:
-                        self.add_entity(ItemsLayer.create_item(cell), 'item_%i_%i' % (row, column))
+                        self.add_entity(TestItem02(cell), 'item_%i_%i' % (row, column))
                         to_spawn -= 1
 
     def get_item_from_cell(self, cell):
@@ -29,11 +36,3 @@ class ItemsLayer(Layer):
             if ent.ground_cell == cell:
                 return ent
         return None
-
-    @staticmethod
-    def create_item(cell):
-        w = random.randint(1, 100)
-        if w < 50:
-            return TestItem01(cell)
-        else:
-            return TestItem02(cell)

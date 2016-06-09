@@ -34,14 +34,16 @@ class Item(Entity):
             px = globals.VIEW_OFFSET[0] + self.inv_cell.column * globals.INVENTORY_CELL_SIZE + globals.HEX_RADIUS / 2
             py = globals.VIEW_OFFSET[1] + self.inv_cell.row * globals.INVENTORY_CELL_SIZE + globals.HEX_RADIUS / 2
             surface.blit(world.tiles, (px, py), tiles_data.TILES[self.tile_name])
-            label = self.font.render(str(self.count), 1, (255, 255, 0))
-            surface.blit(label, (px + globals.HEX_RADIUS, py + globals.HEX_RADIUS))
+            if self.count > 0:
+                label = self.font.render(str(self.count), 1, (255, 255, 0))
+                surface.blit(label, (px + globals.HEX_RADIUS, py + globals.HEX_RADIUS))
 
         elif self.location == ItemLocation.PLAYER:
             px, py = globals.WINDOW_WIDTH - 180, globals.WINDOW_HEIGHT - 100
             surface.blit(world.tiles, (px, py), tiles_data.TILES[self.tile_name])
-            label = self.font.render(str(self.count), 1, (255, 255, 0))
-            surface.blit(label, (px + globals.HEX_RADIUS, py + globals.HEX_RADIUS))
+            if self.count > 0:
+                label = self.font.render(str(self.count), 1, (255, 255, 0))
+                surface.blit(label, (px + globals.HEX_RADIUS, py + globals.HEX_RADIUS))
 
     def on_pos_click(self, world, pos):
         if self.location == ItemLocation.INVENTORY:
@@ -53,7 +55,7 @@ class Item(Entity):
                 player_layer = world.get_layer('PlayerLayer')
                 inv_layer = world.get_layer('InventoryLayer')
                 inv_layer.del_from_inventory(self)
-                player_layer.take_to_hand(world, self)
+                player_layer.take_item(world, self)
 
         elif self.location == ItemLocation.PLAYER:
             px, py = globals.WINDOW_WIDTH - 180, globals.WINDOW_HEIGHT - 100
