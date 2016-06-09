@@ -1,4 +1,5 @@
 from items.item import Item
+from items.test_item_03 import TestItem03
 
 
 class TestItem02(Item):
@@ -9,7 +10,9 @@ class TestItem02(Item):
         self.count -= 1
 
     def on_action(self, world, by_entity):
-        player_layer = world.get_layer('PlayerLayer')
+        items_layer = world.get_layer('ItemsLayer')
 
         if by_entity.archetype == 'test_item_01':
-            player_layer.pick_up_item(world, self)
+            items_layer.del_entity(self.tag)
+            new_tag = 'item_%i_%i' % (self.ground_cell.row, self.ground_cell.column)
+            items_layer.add_entity(TestItem03(self.ground_cell), new_tag)
