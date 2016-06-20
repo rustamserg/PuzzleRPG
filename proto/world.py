@@ -53,9 +53,9 @@ class World:
             self.surface.set_alpha(255)
 
     def is_in_camera(self, cell):
-        if cell.row not in xrange(self.camera_view.top, self.camera_view.top + self.camera_view.height):
+        if cell.row not in range(self.camera_view.top, self.camera_view.top + self.camera_view.height):
             return False
-        if cell.column not in xrange(self.camera_view.left, self.camera_view.left + self.camera_view.width):
+        if cell.column not in range(self.camera_view.left, self.camera_view.left + self.camera_view.width):
             return False
         return True
 
@@ -82,9 +82,9 @@ class World:
 
     def screen_to_cell(self, pos):
         view_row = 0
-        for row in xrange(self.camera_view.top, self.camera_view.top + self.camera_view.height):
+        for row in range(self.camera_view.top, self.camera_view.top + self.camera_view.height):
             view_col = 0
-            for col in xrange(self.camera_view.left, self.camera_view.left + self.camera_view.width):
+            for col in range(self.camera_view.left, self.camera_view.left + self.camera_view.width):
                 cell = self.hex_map.get_cell(row, col)
                 if cell:
                     px = view_col * globals.HEX_RADIUS * 3 + view_row % 2 * (globals.HEX_RADIUS * 3 / 2)
@@ -100,9 +100,9 @@ class World:
 
     def cell_to_screen(self, cell):
         view_row = 0
-        for r in xrange(self.camera_view.top, self.camera_view.top + self.camera_view.height):
+        for r in range(self.camera_view.top, self.camera_view.top + self.camera_view.height):
             view_col = 0
-            for c in xrange(self.camera_view.left, self.camera_view.left + self.camera_view.width):
+            for c in range(self.camera_view.left, self.camera_view.left + self.camera_view.width):
                 map_cell = self.hex_map.get_cell(r, c)
                 if map_cell:
                     if map_cell.column == cell.column and map_cell.row == cell.row:
