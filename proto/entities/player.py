@@ -27,7 +27,7 @@ class Player(Entity):
                 item = items_layer.get_item_from_cell(cell)
                 if item:
                     hand_item = player_layer.get_first_entity('hand_item')
-                    if hand_item and hand_item.archetype != 'hand':
+                    if hand_item and hand_item.archetype != 'empty_hand':
                         item.on_action(world, hand_item)
                     else:
                         player_layer.pick_up_item(world, item)

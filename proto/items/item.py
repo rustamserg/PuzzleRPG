@@ -2,6 +2,7 @@ import pygame
 from core.entity import Entity
 from data import tiles_data
 import globals
+import random
 
 
 class ItemLocation:
@@ -14,7 +15,7 @@ class ItemLocation:
 
 
 class Item(Entity):
-    def __init__(self, cell, archetype, tile_name):
+    def __init__(self, cell, archetype, tile_names):
         Entity.__init__(self)
         self.ground_cell = cell
         self.archetype = archetype
@@ -22,7 +23,7 @@ class Item(Entity):
         self.count = 1
         self.font = pygame.font.SysFont("monospace", 12)
         self.location = ItemLocation.GROUND
-        self.tile_name = tile_name
+        self.tile_name = random.choice(tile_names)
 
     def draw(self, world, surface):
         if self.location == ItemLocation.GROUND:

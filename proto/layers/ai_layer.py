@@ -2,7 +2,7 @@ import random
 import time
 
 from core.layer import Layer
-from entities.predator import Predator
+from entities.deer import Deer
 from world import TurnType
 
 
@@ -23,7 +23,7 @@ class AILayer(Layer):
             cell = world.hex_map.get_cell(row, column)
             if cell is not None:
                 if ground_layer.can_move_to_cell(cell):
-                    self.add_entity(Predator(cell, 'TODO'), 'predator')
+                    self.add_entity(Deer(cell, 'TODO'))
                     to_spawn -= 1
 
     def update(self, world, turn):

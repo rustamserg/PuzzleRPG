@@ -2,8 +2,8 @@ import random
 import globals
 from core.layer import Layer
 from core.cell import Cell
-from items.test_item_01 import TestItem01
-from items.test_item_02 import TestItem02
+from items.sharp_stone import SharpStone
+from items.stick import Stick
 
 
 class ItemsLayer(Layer):
@@ -18,7 +18,7 @@ class ItemsLayer(Layer):
 
         spawn_cell = world.hex_map.get_cell(globals.CAMERA_ROW, globals.CAMERA_COLUMN)
         spawn_cell = Cell.down_right(spawn_cell)
-        self.add_entity(TestItem01(spawn_cell), 'item_%i_%i' % (spawn_cell.row, spawn_cell.column))
+        self.add_entity(SharpStone(spawn_cell), 'item_%i_%i' % (spawn_cell.row, spawn_cell.column))
 
         to_spawn = 30
         while to_spawn > 0:
@@ -28,7 +28,7 @@ class ItemsLayer(Layer):
             if cell is not None:
                 if ground_layer.can_move_to_cell(cell):
                     if self.get_item_from_cell(cell) is None:
-                        self.add_entity(TestItem02(cell), 'item_%i_%i' % (row, column))
+                        self.add_entity(Stick(cell), 'item_%i_%i' % (row, column))
                         to_spawn -= 1
 
     def get_item_from_cell(self, cell):
