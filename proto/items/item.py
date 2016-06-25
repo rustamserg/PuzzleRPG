@@ -21,6 +21,7 @@ class Item(Entity):
         self.archetype = archetype
         self.inv_cell = None
         self.count = 1
+        self.selected = False
         self.font = pygame.font.SysFont("monospace", 12)
         self.location = ItemLocation.GROUND
         self.tile_name = random.choice(tile_names)
@@ -53,10 +54,7 @@ class Item(Entity):
             rect = pygame.Rect(px, py, globals.HEX_RADIUS, globals.HEX_RADIUS)
 
             if rect.collidepoint(pos):
-                player_layer = world.get_layer('PlayerLayer')
                 inv_layer = world.get_layer('InventoryLayer')
-                inv_layer.del_from_inventory(self)
-                player_layer.take_item(world, self)
 
         elif self.location == ItemLocation.PLAYER:
             px, py = globals.WINDOW_WIDTH - 180, globals.WINDOW_HEIGHT - 100

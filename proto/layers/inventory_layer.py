@@ -46,6 +46,28 @@ class InventoryLayer(Layer):
                     self.add_entity(item, item.tag)
                     return
 
+    def get_selected_cells(self):
+        selected = []
+        for row in range(globals.INVENTORY_HEIGHT):
+            for col in range(globals.INVENTORY_WIDTH):
+                cell = self.get_first_entity('cell_%i_%i' % (row, col))
+                if cell.selected:
+                    selected.append(cell)
+        return selected
+
+    def reset_selection(self):
+        for row in range(globals.INVENTORY_HEIGHT):
+            for col in range(globals.INVENTORY_WIDTH):
+                cell = self.get_first_entity('cell_%i_%i' % (row, col))
+                cell.selected = False
+
     def close_inventory(self, world):
+        selected = self.get_selected_cells()
+        if len(selected) == 1:
+            item = selected[0].item
+            self.del_from_inventory(item)
+            player_layer = world.get_layer('PlayerLayer')
+            player_layer.take_item(world, item)
+        self.reset_selection()
         world.enable_layers()
         self.enable = False
