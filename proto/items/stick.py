@@ -16,3 +16,6 @@ class Stick(Item):
             items_layer.del_entity(self.tag)
             new_tag = 'item_%i_%i' % (self.ground_cell.row, self.ground_cell.column)
             items_layer.add_entity(Liana(self.ground_cell), new_tag)
+            return True
+        return False
+

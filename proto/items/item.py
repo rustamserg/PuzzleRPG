@@ -56,8 +56,13 @@ class Item(Entity):
                 player_layer = world.get_layer('PlayerLayer')
                 player_layer.use_item(world, self)
 
+    def do_action(self, world, by_entity):
+        if not self.on_action(world, by_entity):
+            player_layer = world.get_layer('PlayerLayer')
+            player_layer.pick_up_item(world, self)
+
     def on_action(self, world, by_entity):
-        pass
+        return False
 
     def on_use(self, world, player):
         pass
