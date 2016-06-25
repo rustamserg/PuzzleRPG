@@ -48,15 +48,7 @@ class Item(Entity):
                 surface.blit(label, (px + globals.HEX_RADIUS, py + globals.HEX_RADIUS))
 
     def on_pos_click(self, world, pos):
-        if self.location == ItemLocation.INVENTORY:
-            px = globals.VIEW_OFFSET[0] + self.inv_cell.column * globals.INVENTORY_CELL_SIZE + globals.HEX_RADIUS / 2
-            py = globals.VIEW_OFFSET[1] + self.inv_cell.row * globals.INVENTORY_CELL_SIZE + globals.HEX_RADIUS / 2
-            rect = pygame.Rect(px, py, globals.HEX_RADIUS, globals.HEX_RADIUS)
-
-            if rect.collidepoint(pos):
-                inv_layer = world.get_layer('InventoryLayer')
-
-        elif self.location == ItemLocation.PLAYER:
+        if self.location == ItemLocation.PLAYER:
             px, py = globals.WINDOW_WIDTH - 180, globals.WINDOW_HEIGHT - 100
             rect = pygame.Rect(px, py, globals.HEX_RADIUS, globals.HEX_RADIUS)
 

@@ -3,6 +3,7 @@ from core.layer import Layer
 from core.cell import Cell
 from entities.inventory_cell import InventoryCell
 from entities.button import Button
+from entities.craft import Craft
 from items.item import ItemLocation
 
 
@@ -11,6 +12,8 @@ class InventoryLayer(Layer):
         Layer.__init__(self, False)
 
     def init(self, world):
+        self.add_entity(Craft(), 'craft')
+
         for row in range(globals.INVENTORY_HEIGHT):
             for col in range(globals.INVENTORY_WIDTH):
                 pos_x = globals.VIEW_OFFSET[0] + col * globals.INVENTORY_CELL_SIZE
@@ -56,7 +59,7 @@ class InventoryLayer(Layer):
             for col in range(globals.INVENTORY_WIDTH):
                 cell = self.get_first_entity('cell_%i_%i' % (row, col))
                 if cell.selected:
-                    selected.append(cell)
+                    selected.append(cell.item)
         return selected
 
     def reset_selection(self):
@@ -68,7 +71,7 @@ class InventoryLayer(Layer):
     def close_inventory(self, world):
         selected = self.get_selected_cells()
         if len(selected) == 1:
-            item = selected[0].item
+            item = selected[0]
             self.del_from_inventory(item)
             player_layer = world.get_layer('PlayerLayer')
             player_layer.take_item(world, item)
@@ -77,4 +80,15 @@ class InventoryLayer(Layer):
         self.enable = False
 
     def do_craft(self, world):
+        selected = self.get_selected_cells()
+        if len(selected) > 1:
+            craft = self.get_first_entity('craft')
+            if craft:
+                crafted = craft.combine(selected)
+                if crafted:
+                    for item in selected:
+                        item.count -= 1
+                        if item.count == 0:
+                            self.del_from_inventory(item)
+                    self.add_to_inventory(crafted)
         self.reset_selection()
