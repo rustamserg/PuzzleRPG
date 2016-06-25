@@ -22,6 +22,10 @@ class InventoryLayer(Layer):
         btn_inv.on_click = self.close_inventory
         self.add_entity(btn_inv)
 
+        btn_craft = Button((globals.WINDOW_WIDTH - 380, globals.WINDOW_HEIGHT - 100), 'Craft')
+        btn_craft.on_click = self.do_craft
+        self.add_entity(btn_craft)
+
     def del_from_inventory(self, item):
         inv_cell = self.get_first_entity('cell_%i_%i' % (item.inv_cell.row, item.inv_cell.column))
         inv_cell.item = None
@@ -71,3 +75,6 @@ class InventoryLayer(Layer):
         self.reset_selection()
         world.enable_layers()
         self.enable = False
+
+    def do_craft(self, world):
+        self.reset_selection()
