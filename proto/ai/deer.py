@@ -1,7 +1,7 @@
 from core.cell import Cell
-from items.crafted.raw_meat import RawMeat
-from entities.game_object import GameObject
 from entities.game_object import ActionResult
+from entities.game_object import GameObject
+from items.crafted.raw_meat import RawMeat
 
 
 class Deer(GameObject):
