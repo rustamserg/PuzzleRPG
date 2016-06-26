@@ -1,3 +1,4 @@
+import copy
 from core.entity import Entity
 from items.spear import Spear
 
@@ -10,9 +11,10 @@ class Craft(Entity):
     def combine(self, items):
         for crafted, recipe in self.recipes.items():
             test = list(recipe)
-            for item in items:
-                if item.archetype in test:
-                    test.remove(item.archetype)
-            if len(test) == 0:
-                return crafted
+            if len(test) == len(items):
+                for item in items:
+                    if item.archetype in test:
+                        test.remove(item.archetype)
+                if len(test) == 0:
+                    return copy.copy(crafted)
         return None
