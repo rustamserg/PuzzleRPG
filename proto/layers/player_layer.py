@@ -1,7 +1,7 @@
 import globals
 from core.layer import Layer
+from entities.item import ItemLocation
 from entities.player import Player
-from items.item import ItemLocation
 from items.empty_hand import EmptyHand
 
 

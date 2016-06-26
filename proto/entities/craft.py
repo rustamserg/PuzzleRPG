@@ -1,12 +1,15 @@
 import copy
+
 from core.entity import Entity
-from items.spear import Spear
+from items.crafted.spear import Spear
+from items.crafted.axe import Axe
 
 
 class Craft(Entity):
     def __init__(self):
         Entity.__init__(self)
-        self.recipes = {Spear(None): ['sharp_stone', 'stick', 'liana']}
+        self.recipes = {Spear(None): ['sharp_stone', 'stick', 'liana'],
+                        Axe(None): ['sharp_stone', 'log', 'liana']}
 
     def combine(self, items):
         for crafted, recipe in self.recipes.items():
