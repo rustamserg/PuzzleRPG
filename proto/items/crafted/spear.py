@@ -1,6 +1,6 @@
-from entities.item import Item
+from entities.game_object import GameObject
 
 
-class Spear(Item):
+class Spear(GameObject):
     def __init__(self, cell):
-        Item.__init__(self, cell, 'spear', ['spear_01'])
+        GameObject.__init__(self, cell, 'spear', ['spear_01'])

@@ -1,7 +1,7 @@
-from entities.item import Item
+from entities.game_object import GameObject
 
 
-class EmptyHand(Item):
+class EmptyHand(GameObject):
     def __init__(self, cell):
-        Item.__init__(self, cell, 'empty_hand', ['empty_hand'])
+        GameObject.__init__(self, cell, 'empty_hand', ['empty_hand'])
         self.count = -1

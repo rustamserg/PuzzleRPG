@@ -1,6 +1,6 @@
 import globals
 from core.layer import Layer
-from entities.item import ItemLocation
+from entities.game_object import ObjectLocation
 from entities.player import Player
 from items.empty_hand import EmptyHand
 
@@ -18,14 +18,14 @@ class PlayerLayer(Layer):
         hand_item = self.get_first_entity('hand_item')
         if not hand_item:
             self.add_entity(item, 'hand_item')
-            item.location = ItemLocation.PLAYER
+            item.location = ObjectLocation.PLAYER
         else:
             if hand_item.archetype == item.archetype:
                 hand_item.count += item.count
             else:
                 self.del_entity('hand_item')
                 self.add_entity(item, 'hand_item')
-                item.location = ItemLocation.PLAYER
+                item.location = ObjectLocation.PLAYER
 
                 inv_layer = world.get_layer('InventoryLayer')
                 inv_layer.add_to_inventory(hand_item)

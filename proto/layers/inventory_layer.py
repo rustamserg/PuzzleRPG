@@ -4,7 +4,7 @@ from core.layer import Layer
 from entities.button import Button
 from entities.craft import Craft
 from entities.inventory_cell import InventoryCell
-from entities.item import ItemLocation
+from entities.game_object import ObjectLocation
 
 
 class InventoryLayer(Layer):
@@ -47,7 +47,7 @@ class InventoryLayer(Layer):
                 inv_cell = self.get_first_entity('cell_%i_%i' % (row, col))
                 if not inv_cell.item:
                     inv_cell.item = item
-                    item.location = ItemLocation.INVENTORY
+                    item.location = ObjectLocation.INVENTORY
                     item.inv_cell = Cell(row, col)
                     item.tag = 'item_%i_%i' % (row, col)
                     self.add_entity(item, item.tag)

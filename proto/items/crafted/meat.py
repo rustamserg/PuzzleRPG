@@ -1,9 +1,9 @@
-from entities.item import Item
+from entities.game_object import GameObject
 
 
-class Meat(Item):
+class Meat(GameObject):
     def __init__(self, cell):
-        Item.__init__(self, cell, 'meat', ['meat_01'])
+        GameObject.__init__(self, cell, 'meat', ['meat_01'])
 
     def on_use(self, world, player):
         self.count -= 1

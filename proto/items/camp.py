@@ -1,11 +1,11 @@
-from entities.item import Item
-from entities.item import ActionResult
+from entities.game_object import GameObject
+from entities.game_object import ActionResult
 from items.crafted.fire_camp import FireCamp
 
 
-class Camp(Item):
+class Camp(GameObject):
     def __init__(self, cell):
-        Item.__init__(self, cell, 'camp', ['camp_01'])
+        GameObject.__init__(self, cell, 'camp', ['camp_01'])
 
     def on_action(self, world, by_entity):
         if by_entity.archetype == 'log':

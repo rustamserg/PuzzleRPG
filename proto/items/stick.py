@@ -1,7 +1,7 @@
-from entities.item import Item
+from entities.game_object import GameObject
 
 
-class Stick(Item):
+class Stick(GameObject):
     def __init__(self, cell):
-        Item.__init__(self, cell, 'stick', ['stick_01'])
+        GameObject.__init__(self, cell, 'stick', ['stick_01'])
 
