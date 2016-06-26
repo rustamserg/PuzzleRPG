@@ -14,6 +14,15 @@ class ItemLocation:
     PLAYER = 3
 
 
+class ActionResult:
+    def __init__(self):
+        pass
+
+    IGNORE = 1,
+    PICKUP = 2,
+    USED = 3
+
+
 class Item(Entity):
     def __init__(self, cell, archetype, tile_names):
         Entity.__init__(self)
@@ -57,12 +66,16 @@ class Item(Entity):
                 player_layer.use_item(world, self)
 
     def do_action(self, world, by_entity):
-        if not self.on_action(world, by_entity):
+        result = self.on_action(world, by_entity)
+        if result == ActionResult.PICKUP:
             player_layer = world.get_layer('PlayerLayer')
             player_layer.pick_up_item(world, self)
+        elif result == ActionResult.USED:
+            player_layer = world.get_layer('PlayerLayer')
+            player_layer.use_item(world, by_entity)
 
     def on_action(self, world, by_entity):
-        return False
+        return ActionResult.PICKUP
 
     def on_use(self, world, player):
         pass
