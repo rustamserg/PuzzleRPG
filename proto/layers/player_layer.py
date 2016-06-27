@@ -31,9 +31,12 @@ class PlayerLayer(Layer):
                 inv_layer.add_to_inventory(hand_item)
 
     def use_item(self, world, item):
-        if item.count > 0:
-            player = self.get_first_entity('player')
-            item.on_use(world, player)
+        player = self.get_first_entity('player')
+        item.on_use(world, player)
+
+    def get_health(self):
+        player = self.get_first_entity('player')
+        return player.health
 
     def pick_up_item(self, world, item):
         items_layer = world.get_layer('ItemsLayer')

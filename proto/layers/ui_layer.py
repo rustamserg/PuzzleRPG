@@ -1,7 +1,7 @@
 import globals
 from core.layer import Layer
-from entities.button import Button
-from entities.label import Label
+from entities.ui.button import Button
+from entities.ui.label import Label
 
 
 class UILayer(Layer):
@@ -13,10 +13,15 @@ class UILayer(Layer):
         btn_inv.on_click = self.open_inventory
         self.add_entity(btn_inv)
         self.add_entity(Label((globals.VIEW_OFFSET[0], globals.WINDOW_HEIGHT - 40), 'Status'), 'lbl_status')
+        self.add_entity(Label((globals.VIEW_OFFSET[0], 10), 'Health'), 'lbl_health')
 
     def update(self, world, turn):
         lbl = self.get_first_entity('lbl_status')
         lbl.text = 'Turn: %s' % turn
+
+        player_layer = world.get_layer('PlayerLayer')
+        lbl = self.get_first_entity('lbl_health')
+        lbl.text = 'Health: %i' % player_layer.get_health()
 
     @staticmethod
     def open_inventory(world):

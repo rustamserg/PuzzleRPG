@@ -52,9 +52,10 @@ class GameObject(Entity):
             px, py = globals.WINDOW_WIDTH - 180, globals.WINDOW_HEIGHT - 100
             rect = pygame.Rect(px, py, globals.HEX_RADIUS, globals.HEX_RADIUS)
 
-            if rect.collidepoint(pos):
+            if self.count > 0 and rect.collidepoint(pos):
                 player_layer = world.get_layer('PlayerLayer')
                 player_layer.use_item(world, self)
+                self.count -= 1
 
     def do_action(self, world, by_entity):
         result = False

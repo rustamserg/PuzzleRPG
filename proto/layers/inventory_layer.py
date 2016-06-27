@@ -1,10 +1,10 @@
 import globals
 from core.cell import Cell
 from core.layer import Layer
-from entities.button import Button
 from entities.craft import Craft
-from entities.inventory_cell import InventoryCell
 from entities.game_object import ObjectLocation
+from entities.ui.button import Button
+from entities.ui.inventory_cell import InventoryCell
 
 
 class InventoryLayer(Layer):
