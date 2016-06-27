@@ -13,4 +13,5 @@ TILES = {'player': pygame.Rect(1 * 32, 0 * 32, 32, 32),
          'meat_01': pygame.Rect(11 * 32, 0 * 32, 32, 32),
          'tree_01': pygame.Rect(12 * 32, 0 * 32, 32, 32),
          'fire_camp_01': pygame.Rect(13 * 32, 0 * 32, 32, 32),
+         'tree_02':  pygame.Rect(14 * 32, 0 * 32, 32, 32),
          'empty_hand': pygame.Rect(0 * 32, 0 * 32, 32, 32)}

@@ -31,14 +31,17 @@ class PlayerLayer(Layer):
                 inv_layer.add_to_inventory(hand_item)
 
     def use_item(self, world, item):
-        player = self.get_first_entity('player')
-        item.on_use(world, player)
-        if item.count == 0:
-            self.del_entity('hand_item')
+        if item.count > 0:
+            player = self.get_first_entity('player')
+            item.on_use(world, player)
 
-    @staticmethod
-    def pick_up_item(world, item):
+    def pick_up_item(self, world, item):
         items_layer = world.get_layer('ItemsLayer')
-        inv_layer = world.get_layer('InventoryLayer')
         items_layer.del_entity(item.tag)
-        inv_layer.add_to_inventory(item)
+
+        hand_item = self.get_first_entity('hand_item')
+        if hand_item and hand_item.archetype == item.archetype:
+            hand_item.count += item.count
+        else:
+            inv_layer = world.get_layer('InventoryLayer')
+            inv_layer.add_to_inventory(item)

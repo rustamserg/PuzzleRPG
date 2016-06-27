@@ -1,6 +1,5 @@
 import random
 from core.cell import Cell
-from entities.game_object import ActionResult
 from entities.game_object import GameObject
 from items.crafted.raw_meat import RawMeat
 
@@ -18,11 +17,14 @@ class Deer(GameObject):
         if len(to_move) > 0:
             self.ground_cell = random.choice(to_move)
 
-    def do_action(self, world, by_entity):
+    def try_pickup(self, world, by_entity):
+        return False
+
+    def try_combine(self, world, by_entity):
         if by_entity.archetype == 'spear':
             ai_layer = world.get_layer('AILayer')
             items_layer = world.get_layer('ItemsLayer')
             ai_layer.del_entity(self.tag)
             item_tag = 'item_%i_%i' % (self.ground_cell.row, self.ground_cell.column)
             items_layer.add_entity(RawMeat(self.ground_cell), item_tag)
-        return ActionResult.IGNORE
+        return False

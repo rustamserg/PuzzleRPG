@@ -8,6 +8,7 @@ class Player(Entity):
     def __init__(self, cell):
         Entity.__init__(self)
         self.cell = cell
+        self.health = 100
 
     def draw(self, world, surface):
         if world.is_in_camera(self.cell):

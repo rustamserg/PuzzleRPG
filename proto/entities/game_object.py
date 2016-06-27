@@ -14,15 +14,6 @@ class ObjectLocation:
     PLAYER = 3
 
 
-class ActionResult:
-    def __init__(self):
-        pass
-
-    IGNORE = 1,
-    PICKUP = 2,
-    USED = 3
-
-
 class GameObject(Entity):
     def __init__(self, cell, archetype, tile_names):
         Entity.__init__(self)
@@ -45,14 +36,14 @@ class GameObject(Entity):
             px = globals.VIEW_OFFSET[0] + self.inv_cell.column * globals.INVENTORY_CELL_SIZE + globals.HEX_RADIUS / 2
             py = globals.VIEW_OFFSET[1] + self.inv_cell.row * globals.INVENTORY_CELL_SIZE + globals.HEX_RADIUS / 2
             surface.blit(world.tiles, (px, py), tiles_data.TILES[self.tile_name])
-            if self.count > 0:
+            if self.count >= 0:
                 label = self.font.render(str(self.count), 1, (255, 255, 0))
                 surface.blit(label, (px + globals.HEX_RADIUS, py + globals.HEX_RADIUS))
 
         elif self.location == ObjectLocation.PLAYER:
             px, py = globals.WINDOW_WIDTH - 180, globals.WINDOW_HEIGHT - 100
             surface.blit(world.tiles, (px, py), tiles_data.TILES[self.tile_name])
-            if self.count > 0:
+            if self.count >= 0:
                 label = self.font.render(str(self.count), 1, (255, 255, 0))
                 surface.blit(label, (px + globals.HEX_RADIUS, py + globals.HEX_RADIUS))
 
@@ -66,16 +57,22 @@ class GameObject(Entity):
                 player_layer.use_item(world, self)
 
     def do_action(self, world, by_entity):
-        result = self.on_action(world, by_entity)
-        if result == ActionResult.PICKUP:
-            player_layer = world.get_layer('PlayerLayer')
-            player_layer.pick_up_item(world, self)
-        elif result == ActionResult.USED:
-            player_layer = world.get_layer('PlayerLayer')
-            player_layer.use_item(world, by_entity)
+        result = False
+        if by_entity.count > 0:
+            result = self.try_combine(world, by_entity)
+            if result:
+                by_entity.count -= 1
+        if not result:
+            result = self.try_pickup(world, by_entity)
+            if result:
+                player_layer = world.get_layer('PlayerLayer')
+                player_layer.pick_up_item(world, self)
 
-    def on_action(self, world, by_entity):
-        return ActionResult.PICKUP
+    def try_pickup(self, world, by_entity):
+        return True
+
+    def try_combine(self, world, by_entity):
+        return False
 
     def on_use(self, world, player):
         pass

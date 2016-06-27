@@ -16,7 +16,7 @@ class InventoryCell(Entity):
 
     def on_pos_click(self, world, pos):
         if self.button_rect.collidepoint(pos):
-            if self.item:
+            if self.item and self.item.count != 0:
                 self.selected = not self.selected
 
     def draw(self, world, surface):
