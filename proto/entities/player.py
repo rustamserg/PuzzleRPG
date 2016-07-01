@@ -9,11 +9,17 @@ class Player(Entity):
         Entity.__init__(self)
         self.cell = cell
         self.health = 100
+        self.hunger = 0
+        self.fatigue = 0
 
     def draw(self, world, surface):
         if world.is_in_camera(self.cell):
             px, py = world.cell_to_ul_screen(self.cell)
             surface.blit(world.tiles, (px, py), tiles_data.TILES['player'])
+
+    def on_tod_changed(self, event):
+        self.hunger += 10
+        pass
 
     def on_cell_click(self, world, cell):
         if world.turn == TurnType.AI:

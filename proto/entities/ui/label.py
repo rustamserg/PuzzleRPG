@@ -3,7 +3,7 @@ from core.entity import Entity
 
 
 class Label(Entity):
-    def __init__(self, pos, text):
+    def __init__(self, pos, text=''):
         Entity.__init__(self)
         self.pos = pos
         self.text = text

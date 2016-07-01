@@ -11,7 +11,9 @@ class PlayerLayer(Layer):
 
     def init(self, world):
         spawn_cell = world.hex_map.get_cell(globals.CAMERA_ROW, globals.CAMERA_COLUMN)
-        self.add_entity(Player(spawn_cell), 'player')
+        player = Player(spawn_cell)
+        world.subscribe(player.on_tod_changed)
+        self.add_entity(player, 'player')
         self.take_item(world, EmptyHand(spawn_cell))
 
     def take_item(self, world, item):
@@ -37,6 +39,14 @@ class PlayerLayer(Layer):
     def get_health(self):
         player = self.get_first_entity('player')
         return player.health
+
+    def get_hunger(self):
+        player = self.get_first_entity('player')
+        return player.hunger
+
+    def get_fatigue(self):
+        player = self.get_first_entity('player')
+        return player.fatigue
 
     def pick_up_item(self, world, item):
         items_layer = world.get_layer('ItemsLayer')

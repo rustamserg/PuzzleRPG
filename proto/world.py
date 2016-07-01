@@ -4,6 +4,7 @@ import os
 import pygame
 
 import globals
+from core.observable import Observable
 
 
 class TurnType:
@@ -14,12 +15,15 @@ class TurnType:
     PLAYER = 'Player'
 
 
-class World:
+class World(Observable):
     def __init__(self, surface, hex_map, camera_view):
+        Observable.__init__(self)
         self.surface = surface
         self.hex_map = hex_map
         self.camera_view = camera_view
         self.layers = []
+        self.tod = [12, 0]
+        self.tod_speed_min = 20
         self.turn = TurnType.PLAYER
         self.tiles = pygame.image.load(os.path.join('data', 'tiles.png')).convert_alpha()
 
@@ -51,6 +55,16 @@ class World:
         else:
             self.turn = TurnType.PLAYER
             self.surface.set_alpha(255)
+            self.update_tod()
+
+    def update_tod(self):
+        self.tod[1] += self.tod_speed_min
+        if self.tod[1] >= 60:
+            self.tod[1] -= 60
+            self.tod[0] += 1
+            if self.tod[0] >= 24:
+                self.tod[0] = 0
+        self.fire(hours=self.tod[0], minutes=self.tod[1])
 
     def is_in_camera(self, cell):
         if cell.row not in range(self.camera_view.top, self.camera_view.top + self.camera_view.height):

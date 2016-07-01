@@ -2,6 +2,7 @@ class Layer:
     def __init__(self, enable=True):
         self.entities = []
         self.enable = enable
+        self.world = None
 
     def init(self, world):
         pass
