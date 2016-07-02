@@ -1,12 +1,11 @@
 import math
 import os
-
 import pygame
 
 import globals
 from globals import TurnType
 from core.observable import Observable
-from scenes.game_scene import GameScene
+from core.director import Director
 
 
 class Game(Observable):
@@ -15,18 +14,21 @@ class Game(Observable):
         self.surface = surface
         self.hex_map = hex_map
         self.camera_view = camera_view
-        self.main_scene = GameScene()
+        self.director = Director()
         self.tod = [12, 0]
         self.tod_speed_min = 20
         self.turn = TurnType.PLAYER
         self.tiles = pygame.image.load(os.path.join('data', 'tiles.png')).convert_alpha()
 
     def init(self):
-        self.main_scene.compose(self)
-        self.main_scene.init(self)
+        self.director.compose()
 
     def start(self):
-        self.main_scene.start(self)
+        self.director.activate_scene('GameScene', self)
+
+    @property
+    def scene(self):
+        return self.director.active_scene
 
     def end_turn(self):
         if self.turn == TurnType.PLAYER:
@@ -63,13 +65,13 @@ class Game(Observable):
 
     def on_click(self, pos):
         cell = self.screen_to_cell(pos)
-        self.main_scene.on_click(self, pos, cell)
+        self.director.on_click(self, pos, cell)
 
     def draw(self):
-        self.main_scene.draw(self, self.surface)
+        self.director.draw(self, self.surface)
 
     def update(self):
-        self.main_scene.update(self, self.turn)
+        self.director.update(self, self.turn)
 
     def screen_to_cell(self, pos):
         view_row = 0

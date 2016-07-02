@@ -13,7 +13,7 @@ class ItemsLayer(Layer):
         Layer.__init__(self, z_order)
 
     def start(self, game):
-        ground_layer = game.main_scene.get_layer('GroundLayer')
+        ground_layer = game.scene.get_layer('GroundLayer')
 
         to_spawn = 30
         while to_spawn > 0:

@@ -73,10 +73,10 @@ class InventoryLayer(Layer):
         if len(selected) == 1:
             item = selected[0]
             self.del_from_inventory(item)
-            player_layer = game.main_scene.get_layer('PlayerLayer')
+            player_layer = game.scene.get_layer('PlayerLayer')
             player_layer.take_item(game, item)
         self.reset_selection()
-        game.main_scene.enable_layers()
+        game.scene.enable_layers()
         self.enable = False
 
     def do_craft(self, game):

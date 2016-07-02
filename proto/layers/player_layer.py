@@ -29,7 +29,7 @@ class PlayerLayer(Layer):
                 self.add_entity(item, 'hand_item')
                 item.location = ObjectLocation.PLAYER
 
-                inv_layer = game.main_scene.get_layer('InventoryLayer')
+                inv_layer = game.scene.get_layer('InventoryLayer')
                 inv_layer.add_to_inventory(hand_item)
 
     def use_item(self, game, item):
@@ -49,12 +49,12 @@ class PlayerLayer(Layer):
         return player.fatigue
 
     def pick_up_item(self, game, item):
-        items_layer = game.main_scene.get_layer('ItemsLayer')
+        items_layer = game.scene.get_layer('ItemsLayer')
         items_layer.del_entity(item.tag)
 
         hand_item = self.get_first_entity('hand_item')
         if hand_item and hand_item.archetype == item.archetype:
             hand_item.count += item.count
         else:
-            inv_layer = game.main_scene.get_layer('InventoryLayer')
+            inv_layer = game.scene.get_layer('InventoryLayer')
             inv_layer.add_to_inventory(item)

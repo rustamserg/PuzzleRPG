@@ -9,7 +9,7 @@ class Deer(GameObject):
         GameObject.__init__(self, cell, 'deer', ['deer_01'])
 
     def do_turn(self, game):
-        ground_layer = game.main_scene.get_layer('GroundLayer')
+        ground_layer = game.scene.get_layer('GroundLayer')
         to_move = []
         for c in Cell.round_bbox(self.ground_cell):
             if ground_layer.can_move_to_cell(c):
@@ -22,8 +22,8 @@ class Deer(GameObject):
 
     def try_combine(self, game, by_entity):
         if by_entity.archetype == 'spear':
-            ai_layer = game.main_scene.get_layer('AILayer')
-            items_layer = game.main_scene.get_layer('ItemsLayer')
+            ai_layer = game.scene.get_layer('AILayer')
+            items_layer = game.scene.get_layer('ItemsLayer')
             ai_layer.del_entity(self.tag)
             item_tag = 'item_%i_%i' % (self.ground_cell.row, self.ground_cell.column)
             items_layer.add_entity(RawMeat(self.ground_cell), item_tag)

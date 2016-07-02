@@ -11,7 +11,7 @@ class FireCamp(GameObject):
 
     def try_combine(self, game, by_entity):
         if by_entity.archetype == 'raw_meat':
-            inv_layer = game.main_scene.get_layer('InventoryLayer')
+            inv_layer = game.scene.get_layer('InventoryLayer')
             inv_layer.add_to_inventory(Meat(None))
             return True
         return False

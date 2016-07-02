@@ -3,6 +3,10 @@ class Scene:
         self.layers = {}
         self.sorted_layers = []
 
+    @property
+    def tag(self):
+        return str(self.__class__.__name__)
+
     def add_layer(self, layer):
         self.layers[layer.tag] = layer
         self.sorted_layers = [x for tag, x in sorted(self.layers.items(), key=lambda x: x[1].z_order)]

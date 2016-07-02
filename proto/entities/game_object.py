@@ -53,7 +53,7 @@ class GameObject(Entity):
             rect = pygame.Rect(px, py, globals.HEX_RADIUS, globals.HEX_RADIUS)
 
             if self.count > 0 and rect.collidepoint(pos):
-                player_layer = game.main_scene.get_layer('PlayerLayer')
+                player_layer = game.scene.get_layer('PlayerLayer')
                 player_layer.use_item(game, self)
                 self.count -= 1
 
@@ -66,7 +66,7 @@ class GameObject(Entity):
         if not result:
             result = self.try_pickup(game, by_entity)
             if result:
-                player_layer = game.main_scene.get_layer('PlayerLayer')
+                player_layer = game.scene.get_layer('PlayerLayer')
                 player_layer.pick_up_item(game, self)
 
     def try_pickup(self, game, by_entity):

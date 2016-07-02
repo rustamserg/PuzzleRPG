@@ -22,7 +22,7 @@ class UILayer(Layer):
         lbl = self.get_first_entity('lbl_status')
         lbl.text = 'Turn: %s' % turn
 
-        player_layer = game.main_scene.get_layer('PlayerLayer')
+        player_layer = game.scene.get_layer('PlayerLayer')
         lbl = self.get_first_entity('lbl_health')
         lbl.text = 'Health: %i' % player_layer.get_health()
 
@@ -37,6 +37,6 @@ class UILayer(Layer):
 
     @staticmethod
     def open_inventory(game):
-        game.main_scene.enable_layers(False)
-        inv_layer = game.main_scene.get_layer('InventoryLayer')
+        game.scene.enable_layers(False)
+        inv_layer = game.scene.get_layer('InventoryLayer')
         inv_layer.enable = True

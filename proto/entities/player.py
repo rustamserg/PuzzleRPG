@@ -27,10 +27,10 @@ class Player(Entity):
         if game.turn == TurnType.AI:
             return
 
-        ground_layer = game.main_scene.get_layer('GroundLayer')
-        items_layer = game.main_scene.get_layer('ItemsLayer')
-        player_layer = game.main_scene.get_layer('PlayerLayer')
-        ai_layer = game.main_scene.get_layer('AILayer')
+        ground_layer = game.scene.get_layer('GroundLayer')
+        items_layer = game.scene.get_layer('ItemsLayer')
+        player_layer = game.scene.get_layer('PlayerLayer')
+        ai_layer = game.scene.get_layer('AILayer')
 
         for c in Cell.round_bbox(self.cell):
             if c == cell:

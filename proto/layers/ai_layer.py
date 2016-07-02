@@ -12,7 +12,7 @@ class AILayer(Layer):
         self.move_time = time.monotonic()
 
     def start(self, game):
-        ground_layer = game.main_scene.get_layer('GroundLayer')
+        ground_layer = game.scene.get_layer('GroundLayer')
         to_spawn = 10
         while to_spawn > 0:
             row = random.randint(1, game.hex_map.height / 4 - 1)

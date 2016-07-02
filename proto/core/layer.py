@@ -3,12 +3,11 @@ class Layer:
         self.entities = []
         self.enable = enable
         self.z_order = z_order
-        self.world = None
 
-    def init(self, world):
+    def init(self, game):
         pass
 
-    def start(self, world):
+    def start(self, game):
         pass
 
     @property
@@ -28,25 +27,25 @@ class Layer:
     def del_entity(self, tag):
         self.entities = [ent for ent in self.entities if ent.tag != tag]
 
-    def on_click(self, world, pos, cell):
+    def on_click(self, game, pos, cell):
         if not self.enable:
             return
 
         for entity in self.entities:
-            entity.on_pos_click(world, pos)
+            entity.on_pos_click(game, pos)
             if cell is not None:
-                entity.on_cell_click(world, cell)
+                entity.on_cell_click(game, cell)
 
-    def draw(self, world, surface):
+    def draw(self, game, surface):
         if not self.enable:
             return
 
         for entity in self.entities:
-            entity.draw(world, surface)
+            entity.draw(game, surface)
 
-    def update(self, world, turn):
+    def update(self, game, turn):
         if not self.enable:
             return
 
         for entity in self.entities:
-            entity.update(world, turn)
+            entity.update(game, turn)

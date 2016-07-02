@@ -11,7 +11,7 @@ class Tree(GameObject):
 
     def try_combine(self, game, by_entity):
         if by_entity.archetype == 'axe':
-            items_layer = game.main_scene.get_layer('ItemsLayer')
+            items_layer = game.scene.get_layer('ItemsLayer')
             items_layer.del_entity(self.tag)
             items_layer.add_entity(Log(self.ground_cell), self.tag)
         return False
