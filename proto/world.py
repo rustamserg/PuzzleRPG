@@ -64,7 +64,7 @@ class World(Observable):
             self.tod[0] += 1
             if self.tod[0] >= 24:
                 self.tod[0] = 0
-        self.fire(hours=self.tod[0], minutes=self.tod[1])
+        self.fire(event='tod_changed', hours=self.tod[0], minutes=self.tod[1])
 
     def is_in_camera(self, cell):
         if cell.row not in range(self.camera_view.top, self.camera_view.top + self.camera_view.height):
