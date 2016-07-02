@@ -18,11 +18,10 @@ class Player(Entity):
             surface.blit(world.tiles, (px, py), tiles_data.TILES['player'])
 
     def on_tod_changed(self, event):
-        if event.event == 'tod_changed':
-            self.hunger -= 5
-            if self.hunger < 0:
-                self.hunger = 0
-                self.health -= 5
+        self.hunger -= 5
+        if self.hunger < 0:
+            self.hunger = 0
+            self.health -= 5
 
     def on_cell_click(self, world, cell):
         if world.turn == TurnType.AI:
