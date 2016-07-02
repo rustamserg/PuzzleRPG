@@ -1,7 +1,8 @@
 class Layer:
-    def __init__(self, enable=True):
+    def __init__(self, z_order, enable=True):
         self.entities = []
         self.enable = enable
+        self.z_order = z_order
         self.world = None
 
     def init(self, world):

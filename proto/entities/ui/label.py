@@ -9,6 +9,6 @@ class Label(Entity):
         self.text = text
         self.font = pygame.font.SysFont("monospace", 18)
 
-    def draw(self, world, surface):
+    def draw(self, game, surface):
         label = self.font.render(self.text, 1, (255, 255, 0))
         surface.blit(label, self.pos)

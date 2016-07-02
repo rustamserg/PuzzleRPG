@@ -5,10 +5,10 @@ from entities.ui.label import Label
 
 
 class UILayer(Layer):
-    def __init__(self):
-        Layer.__init__(self)
+    def __init__(self, z_order):
+        Layer.__init__(self, z_order)
 
-    def init(self, world):
+    def init(self, game):
         btn_inv = Button((globals.VIEW_OFFSET[0], globals.WINDOW_HEIGHT - 100), 'Inventory')
         btn_inv.on_click = self.open_inventory
         self.add_entity(btn_inv)
@@ -18,11 +18,11 @@ class UILayer(Layer):
         self.add_entity(Label((globals.VIEW_OFFSET[0] + 300, 10)), 'lbl_fatigue')
         self.add_entity(Label((globals.WINDOW_WIDTH - 200, 10)), 'lbl_tod')
 
-    def update(self, world, turn):
+    def update(self, game, turn):
         lbl = self.get_first_entity('lbl_status')
         lbl.text = 'Turn: %s' % turn
 
-        player_layer = world.get_layer('PlayerLayer')
+        player_layer = game.main_scene.get_layer('PlayerLayer')
         lbl = self.get_first_entity('lbl_health')
         lbl.text = 'Health: %i' % player_layer.get_health()
 
@@ -33,10 +33,10 @@ class UILayer(Layer):
         lbl.text = 'Fatigue: %i' % player_layer.get_fatigue()
 
         lbl = self.get_first_entity('lbl_tod')
-        lbl.text = 'Time: %.2i:%.2i' % (world.tod[0], world.tod[1])
+        lbl.text = 'Time: %.2i:%.2i' % (game.tod[0], game.tod[1])
 
     @staticmethod
-    def open_inventory(world):
-        world.enable_layers(False)
-        inv_layer = world.get_layer('InventoryLayer')
+    def open_inventory(game):
+        game.main_scene.enable_layers(False)
+        inv_layer = game.main_scene.get_layer('InventoryLayer')
         inv_layer.enable = True

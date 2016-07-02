@@ -8,10 +8,10 @@ from entities.ui.inventory_cell import InventoryCell
 
 
 class InventoryLayer(Layer):
-    def __init__(self):
-        Layer.__init__(self, False)
+    def __init__(self, z_order):
+        Layer.__init__(self, z_order, False)
 
-    def init(self, world):
+    def init(self, game):
         self.add_entity(Craft(), 'craft')
 
         for row in range(globals.INVENTORY_HEIGHT):
@@ -68,18 +68,18 @@ class InventoryLayer(Layer):
                 cell = self.get_first_entity('cell_%i_%i' % (row, col))
                 cell.selected = False
 
-    def close_inventory(self, world):
+    def close_inventory(self, game):
         selected = self.get_selected_cells()
         if len(selected) == 1:
             item = selected[0]
             self.del_from_inventory(item)
-            player_layer = world.get_layer('PlayerLayer')
-            player_layer.take_item(world, item)
+            player_layer = game.main_scene.get_layer('PlayerLayer')
+            player_layer.take_item(game, item)
         self.reset_selection()
-        world.enable_layers()
+        game.main_scene.enable_layers()
         self.enable = False
 
-    def do_craft(self, world):
+    def do_craft(self, game):
         selected = self.get_selected_cells()
         if len(selected) > 1:
             craft = self.get_first_entity('craft')

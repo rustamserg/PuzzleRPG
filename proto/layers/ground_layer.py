@@ -4,13 +4,13 @@ from entities.ground import Ground, GroundType
 
 
 class GroundLayer(Layer):
-    def __init__(self):
-        Layer.__init__(self)
+    def __init__(self, z_order):
+        Layer.__init__(self, z_order)
 
-    def init(self, world):
-        for row in range(world.hex_map.height):
-            for column in range(world.hex_map.width):
-                cell = world.hex_map.get_cell(row, column)
+    def init(self, game):
+        for row in range(game.hex_map.height):
+            for column in range(game.hex_map.width):
+                cell = game.hex_map.get_cell(row, column)
                 if cell:
                     if row < globals.CAMERA_ROW or row > globals.WORLD_WIDTH - globals.CAMERA_ROW:
                         self.add_entity(Ground(cell, GroundType.WATER))

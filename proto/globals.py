@@ -1,3 +1,11 @@
+class TurnType:
+    def __init__(self):
+        pass
+
+    AI = 'AI'
+    PLAYER = 'Player'
+
+
 WORLD_WIDTH = 100
 WORLD_HEIGHT = 100
 
@@ -15,3 +23,4 @@ WINDOW_HEIGHT = 600
 INVENTORY_WIDTH = 9
 INVENTORY_HEIGHT = 5
 INVENTORY_CELL_SIZE = 64
+

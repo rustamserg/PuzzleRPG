@@ -14,12 +14,12 @@ class InventoryCell(Entity):
         self.button_rect = pygame.Rect(self.pos[0], self.pos[1], self.width, self.height)
         self.font = pygame.font.SysFont("monospace", 18)
 
-    def on_pos_click(self, world, pos):
+    def on_pos_click(self, game, pos):
         if self.button_rect.collidepoint(pos):
             if self.item and self.item.count != 0:
                 self.selected = not self.selected
 
-    def draw(self, world, surface):
+    def draw(self, game, surface):
         self.button_rect = pygame.Rect(self.pos[0], self.pos[1], self.width, self.height)
         pygame.draw.rect(surface, pygame.Color(255, 255, 255), self.button_rect, 1)
         if self.selected:

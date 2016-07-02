@@ -9,17 +9,17 @@ from items.log import Log
 
 
 class ItemsLayer(Layer):
-    def __init__(self):
-        Layer.__init__(self)
+    def __init__(self, z_order):
+        Layer.__init__(self, z_order)
 
-    def start(self, world):
-        ground_layer = world.get_layer('GroundLayer')
+    def start(self, game):
+        ground_layer = game.main_scene.get_layer('GroundLayer')
 
         to_spawn = 30
         while to_spawn > 0:
-            row = random.randint(1, world.hex_map.height/4 - 1)
-            column = random.randint(1, world.hex_map.width/4 - 1)
-            cell = world.hex_map.get_cell(row, column)
+            row = random.randint(1, game.hex_map.height / 4 - 1)
+            column = random.randint(1, game.hex_map.width / 4 - 1)
+            cell = game.hex_map.get_cell(row, column)
             if cell is not None:
                 if ground_layer.can_move_to_cell(cell):
                     if self.get_item_from_cell(cell) is None:

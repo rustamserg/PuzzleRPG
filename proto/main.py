@@ -3,13 +3,7 @@ import pygame
 
 import globals
 from hex_map import HexMap
-from layers.ai_layer import AILayer
-from layers.ground_layer import GroundLayer
-from layers.player_layer import PlayerLayer
-from layers.ui_layer import UILayer
-from layers.inventory_layer import InventoryLayer
-from layers.items_layer import ItemsLayer
-from world import World
+from game import Game
 
 black = pygame.Color(0, 0, 0)
 
@@ -27,17 +21,10 @@ background = pygame.Surface(screen.get_size())
 background = background.convert()
 
 hex_map = HexMap(globals.WORLD_WIDTH, globals.WORLD_HEIGHT)
-world = World(background, hex_map, pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT))
+game = Game(background, hex_map, pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT))
 
-world.add_layer(GroundLayer())
-world.add_layer(ItemsLayer())
-world.add_layer(AILayer())
-world.add_layer(PlayerLayer())
-world.add_layer(UILayer())
-world.add_layer(InventoryLayer())
-
-world.init()
-world.start()
+game.init()
+game.start()
 
 while not done:
 
@@ -49,10 +36,10 @@ while not done:
             done = True
         if event.type == pygame.MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
-            world.on_click(pos)
+            game.on_click(pos)
 
-    world.update()
-    world.draw()
+    game.update()
+    game.draw()
 
     screen.blit(background, (0, 0))
     pygame.display.flip()

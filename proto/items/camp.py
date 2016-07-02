@@ -6,12 +6,12 @@ class Camp(GameObject):
     def __init__(self, cell):
         GameObject.__init__(self, cell, 'camp', ['camp_01'])
 
-    def try_pickup(self, world, by_entity):
+    def try_pickup(self, game, by_entity):
         return False
 
-    def try_combine(self, world, by_entity):
+    def try_combine(self, game, by_entity):
         if by_entity.archetype == 'log':
-            items_layer = world.get_layer('ItemsLayer')
+            items_layer = game.main_scene.get_layer('ItemsLayer')
             items_layer.del_entity(self.tag)
             items_layer.add_entity(FireCamp(self.ground_cell), self.tag)
             return True
