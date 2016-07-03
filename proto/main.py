@@ -21,7 +21,7 @@ background = pygame.Surface(screen.get_size())
 background = background.convert()
 
 hex_map = HexMap(globals.WORLD_WIDTH, globals.WORLD_HEIGHT)
-game = Game(background, hex_map, pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT))
+game = Game(background, hex_map)
 
 game.init()
 game.start()

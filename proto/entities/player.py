@@ -1,3 +1,4 @@
+import globals
 from globals import TurnType
 from core.cell import Cell
 from core.entity import Entity
@@ -9,7 +10,7 @@ class Player(Entity):
         Entity.__init__(self)
         self.cell = cell
         self.health = 100
-        self.hunger = 100
+        self.hunger = 200
         self.fatigue = 100
 
     def draw(self, game, surface):
@@ -18,10 +19,12 @@ class Player(Entity):
             surface.blit(game.tiles, (px, py), tiles_data.TILES['player'])
 
     def on_tod_changed(self, event):
-        self.hunger -= 5
+        self.hunger -= globals.PLAYER_HUNGER_SPEED
         if self.hunger < 0:
             self.hunger = 0
-            self.health -= 5
+            self.health -= globals.PLAYER_HEALTH_SPEED
+        if self.health < 0:
+            event.game.start()
 
     def on_cell_click(self, game, cell):
         if game.turn == TurnType.AI:

@@ -9,11 +9,12 @@ from core.director import Director
 
 
 class Game(Observable):
-    def __init__(self, surface, hex_map, camera_view):
+    def __init__(self, surface, hex_map):
         Observable.__init__(self)
         self.surface = surface
         self.hex_map = hex_map
-        self.camera_view = camera_view
+        self.director = Director()
+        self.camera_view = None
         self.director = Director()
         self.tod = [12, 0]
         self.tod_speed_min = 20
@@ -24,7 +25,11 @@ class Game(Observable):
         self.director.compose()
 
     def start(self):
-        self.director.activate_scene('GameScene', self)
+        self.camera_view = pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT)
+        self.tod = [12, 0]
+        self.tod_speed_min = 20
+        self.turn = TurnType.PLAYER
+        self.director.activate_scene('IntroScene', self)
 
     @property
     def scene(self):
@@ -46,7 +51,7 @@ class Game(Observable):
             self.tod[0] += 1
             if self.tod[0] >= 24:
                 self.tod[0] = 0
-        self.fire('on_tod_changed', hours=self.tod[0], minutes=self.tod[1])
+        self.fire('on_tod_changed', game=self, hours=self.tod[0], minutes=self.tod[1])
 
     def is_in_camera(self, cell):
         if cell.row not in range(self.camera_view.top, self.camera_view.top + self.camera_view.height):

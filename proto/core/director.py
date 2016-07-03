@@ -1,4 +1,5 @@
 from scenes.game_scene import GameScene
+from scenes.intro_scene import IntroScene
 
 
 class Director:
@@ -7,11 +8,19 @@ class Director:
         self.active_scene = None
 
     def compose(self):
-        scene = GameScene()
+        self.add_scene(GameScene())
+        self.add_scene(IntroScene())
+
+    def add_scene(self, scene):
         self.scenes[scene.tag] = scene
 
     def activate_scene(self, tag, game):
+        if self.active_scene:
+            self.active_scene.active = False
+
         self.active_scene = self.scenes[tag]
+        self.active_scene.active = True
+
         self.active_scene.compose(game)
         self.active_scene.init(game)
         self.active_scene.start(game)

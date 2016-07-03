@@ -2,6 +2,7 @@ class Scene:
     def __init__(self):
         self.layers = {}
         self.sorted_layers = []
+        self.active = True
 
     @property
     def tag(self):
@@ -40,3 +41,6 @@ class Scene:
     def update(self, game, turn_type):
         for layer in self.sorted_layers:
             layer.update(game, turn_type)
+            if not self.active:
+                break
+
