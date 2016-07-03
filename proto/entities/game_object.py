@@ -54,8 +54,8 @@ class GameObject(Entity):
 
             if self.count > 0 and rect.collidepoint(pos):
                 player_layer = game.scene.get_layer('PlayerLayer')
-                player_layer.use_item(game, self)
-                self.count -= 1
+                if player_layer.use_item(game, self):
+                    self.count -= 1
 
     def do_action(self, game, by_entity):
         result = False
@@ -76,4 +76,4 @@ class GameObject(Entity):
         return False
 
     def on_used(self, game, player):
-        pass
+        return False

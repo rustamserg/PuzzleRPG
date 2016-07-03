@@ -34,7 +34,7 @@ class PlayerLayer(Layer):
 
     def use_item(self, game, item):
         player = self.get_first_entity('player')
-        item.on_used(game, player)
+        return item.on_used(game, player)
 
     def get_health(self):
         player = self.get_first_entity('player')

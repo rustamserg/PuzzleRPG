@@ -7,3 +7,4 @@ class Meat(GameObject):
 
     def on_used(self, game, player):
         player.hunger += 10
+        return True
