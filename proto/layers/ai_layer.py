@@ -39,4 +39,3 @@ class AILayer(Layer):
             for ent in self.entities:
                 ent.do_turn(game)
             game.end_turn()
-

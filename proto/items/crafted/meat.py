@@ -5,5 +5,5 @@ class Meat(GameObject):
     def __init__(self, cell):
         GameObject.__init__(self, cell, 'meat', ['meat_01'])
 
-    def on_use(self, game, player):
+    def on_used(self, game, player):
         player.hunger += 10

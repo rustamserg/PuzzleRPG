@@ -75,5 +75,5 @@ class GameObject(Entity):
     def try_combine(self, game, by_entity):
         return False
 
-    def on_use(self, game, player):
+    def on_used(self, game, player):
         pass

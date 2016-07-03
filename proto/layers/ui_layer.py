@@ -11,6 +11,7 @@ class UILayer(Layer):
     def init(self, game):
         btn_inv = Button((globals.VIEW_OFFSET[0], globals.WINDOW_HEIGHT - 100), 'Inventory')
         btn_inv.on_click = self.open_inventory
+
         self.add_entity(btn_inv)
         self.add_entity(Label((globals.VIEW_OFFSET[0], globals.WINDOW_HEIGHT - 40), 'Status'), 'lbl_status')
         self.add_entity(Label((globals.VIEW_OFFSET[0], 10)), 'lbl_health')
