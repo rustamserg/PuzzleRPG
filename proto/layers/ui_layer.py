@@ -1,7 +1,7 @@
 import globals
 from core.layer import Layer
-from entities.ui.button import Button
-from entities.ui.label import Label
+from ui.button import Button
+from ui.label import Label
 
 
 class UILayer(Layer):

@@ -1,6 +1,6 @@
 import globals
 from core.layer import Layer
-from entities.ui.button import Button
+from ui.button import Button
 
 
 class IntroLayer(Layer):

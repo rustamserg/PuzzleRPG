@@ -3,8 +3,8 @@ from core.cell import Cell
 from core.layer import Layer
 from entities.craft import Craft
 from entities.game_object import ObjectLocation
-from entities.ui.button import Button
-from entities.ui.inventory_cell import InventoryCell
+from ui.button import Button
+from ui.inventory_cell import InventoryCell
 
 
 class InventoryLayer(Layer):
