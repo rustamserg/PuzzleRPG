@@ -49,13 +49,14 @@ class GameObject(Entity):
 
     def on_pos_click(self, game, pos):
         if self.location == ObjectLocation.PLAYER:
-            px, py = globals.WINDOW_WIDTH - 180, globals.WINDOW_HEIGHT - 100
-            rect = pygame.Rect(px, py, globals.HEX_RADIUS, globals.HEX_RADIUS)
-
-            if self.count > 0 and rect.collidepoint(pos):
+            if self.count > 0:
                 player_layer = game.scene.get_layer('PlayerLayer')
-                if player_layer.use_item(game, self):
-                    self.count -= 1
+                player = player_layer.get_first_entity('player')
+                px, py = game.cell_to_ul_screen(player.cell)
+                rect = pygame.Rect(px, py, globals.HEX_RADIUS, globals.HEX_RADIUS)
+                if rect.collidepoint(pos):
+                    if player_layer.use_item(game, self):
+                        self.count -= 1
 
     def do_action(self, game, by_entity):
         result = False
