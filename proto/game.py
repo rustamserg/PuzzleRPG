@@ -14,11 +14,6 @@ class Game(Observable):
         self.surface = surface
         self.hex_map = hex_map
         self.director = Director()
-        self.camera_view = None
-        self.director = Director()
-        self.tod = [12, 0]
-        self.tod_speed_min = 20
-        self.turn = TurnType.PLAYER
         self.tiles = pygame.image.load(os.path.join('data', 'tiles.png')).convert_alpha()
 
     def init(self):
@@ -27,7 +22,7 @@ class Game(Observable):
     def start(self):
         self.camera_view = pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT)
         self.tod = [12, 0]
-        self.tod_speed_min = 20
+        self.tod_speed_min = globals.WORLD_TOD_SPEED_MIN
         self.turn = TurnType.PLAYER
         self.director.activate_scene('IntroScene', self)
 
