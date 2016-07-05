@@ -1,5 +1,5 @@
 from entities.game_object import GameObject
-from items.crafted.fire_camp import FireCamp
+from items.item_factory import ItemFactory
 
 
 class Camp(GameObject):
@@ -11,8 +11,10 @@ class Camp(GameObject):
 
     def try_combine(self, game, by_entity):
         if by_entity.archetype == 'log':
+            fire_camp = ItemFactory.create('fire_camp.FireCamp', self.ground_cell)
+            game.subscribe(fire_camp.on_tod_changed)
             items_layer = game.scene.get_layer('ItemsLayer')
             items_layer.del_entity(self.tag)
-            items_layer.add_entity(FireCamp(self.ground_cell), self.tag)
+            items_layer.add_entity(fire_camp, self.tag)
             return True
         return False

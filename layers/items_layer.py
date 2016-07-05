@@ -1,11 +1,6 @@
 import random
 from core.layer import Layer
-from items.sharp_stone import SharpStone
-from items.stick import Stick
-from items.liana import Liana
-from items.tree import Tree
-from items.camp import Camp
-from items.log import Log
+from items.item_factory import ItemFactory
 
 
 class ItemsLayer(Layer):
@@ -33,6 +28,6 @@ class ItemsLayer(Layer):
         return None
 
     def spawn_item(self, cell, tag):
-        items = [SharpStone(cell), Stick(cell), Liana(cell), Tree(cell), Camp(cell), Log(cell)]
-        item = random.choice(items)
+        items = ['sharp_stone.SharpStone', 'stick.Stick', 'liana.Liana', 'tree.Tree', 'camp.Camp', 'log.Log']
+        item = ItemFactory.create(random.choice(items), cell)
         self.add_entity(item, tag)

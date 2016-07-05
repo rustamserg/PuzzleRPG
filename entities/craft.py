@@ -1,8 +1,9 @@
 import copy
 
+from items.axe import Axe
+
 from core.entity import Entity
-from items.crafted.spear import Spear
-from items.crafted.axe import Axe
+from items.spear import Spear
 
 
 class Craft(Entity):

@@ -42,7 +42,7 @@ class Game(Observable):
     def update_tod(self):
         self.tod[1] += self.tod_speed_min
         if self.tod[1] >= 60:
-            self.tod[1] -= 60
+            self.tod[1] = 0
             self.tod[0] += 1
             if self.tod[0] >= 24:
                 self.tod[0] = 0

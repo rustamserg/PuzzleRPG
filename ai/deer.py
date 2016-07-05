@@ -1,7 +1,8 @@
 import random
+
 from core.cell import Cell
 from entities.game_object import GameObject
-from items.crafted.raw_meat import RawMeat
+from items.raw_meat import RawMeat
 
 
 class Deer(GameObject):
