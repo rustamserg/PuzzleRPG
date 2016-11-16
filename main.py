@@ -2,7 +2,7 @@
 import pygame
 
 import globals
-from hex_map import HexMap
+from core.hex_map import HexMap
 from game import Game
 
 black = pygame.Color(0, 0, 0)
