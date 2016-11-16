@@ -30,7 +30,7 @@ class Player(Entity):
         player_layer = game.scene.get_layer('PlayerLayer')
         ai_layer = game.scene.get_layer('AILayer')
 
-        for c in Cell.round_bbox(self.cell):
+        for c in game.hex_map.round_bbox(self.cell):
             if c == cell:
                 item = items_layer.get_item_from_cell(cell)
                 if item:

@@ -7,6 +7,8 @@ from core.entity import Entity
 green = pygame.Color(0, 255, 0)
 blue = pygame.Color(0, 0, 255)
 black = pygame.Color(0, 0, 0)
+yellow = pygame.Color(255, 255, 0)
+grey = pygame.Color(100, 100, 100)
 
 
 class GroundType:
@@ -15,6 +17,8 @@ class GroundType:
 
     WATER = 1
     GRASS = 2
+    SAND = 3
+    STONE = 4
 
 
 class Ground(Entity):
@@ -35,6 +39,10 @@ class Ground(Entity):
                 color = green
             elif self.ground_type == GroundType.WATER:
                 color = blue
+            elif self.ground_type == GroundType.SAND:
+                color = yellow
+            elif self.ground_type == GroundType.STONE:
+                color = grey
             else:
                 color = black
             pygame.draw.polygon(surface, color, points)

@@ -12,7 +12,7 @@ class Deer(GameObject):
     def do_turn(self, game):
         ground_layer = game.scene.get_layer('GroundLayer')
         to_move = []
-        for c in Cell.round_bbox(self.ground_cell):
+        for c in game.hex_map.round_bbox(self.ground_cell):
             if ground_layer.can_move_to_cell(c):
                 to_move.append(c)
         if len(to_move) > 0:

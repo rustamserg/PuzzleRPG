@@ -17,10 +17,11 @@ class GroundLayer(Layer):
                     elif column < globals.CAMERA_COLUMN or column > globals.WORLD_HEIGHT - globals.CAMERA_COLUMN:
                         self.add_entity(Ground(cell, GroundType.WATER))
                     else:
-                        self.add_entity(Ground(cell, GroundType.GRASS))
+                        self.add_entity(Ground(cell, GroundType.SAND))
 
     def can_move_to_cell(self, cell):
         for ent in self.entities:
-            if ent.cell == cell and ent.ground_type == GroundType.GRASS:
-                return True
+            if ent.cell == cell:
+                if ent.ground_type == GroundType.GRASS or ent.ground_type == GroundType.SAND:
+                    return True
         return False

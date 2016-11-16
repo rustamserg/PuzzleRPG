@@ -24,3 +24,11 @@ class HexMap:
             if 0 <= column < self.width:
                 return self.cells[row][column]
         return None
+
+    def round_bbox(self, cell):
+        yield self.get_cell(cell.row - 2, cell.column)
+        yield self.get_cell(cell.row - 1, cell.column + 1)
+        yield self.get_cell(cell.row - 1, cell.column - 1)
+        yield self.get_cell(cell.row + 2, cell.column)
+        yield self.get_cell(cell.row + 1, cell.column + 1)
+        yield self.get_cell(cell.row + 1, cell.column - 1)
