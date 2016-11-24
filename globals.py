@@ -4,6 +4,7 @@ class TurnType:
 
     AI = 'AI'
     PLAYER = 'Player'
+    EDITOR = 'Editor'
 
 
 WORLD_WIDTH = 100

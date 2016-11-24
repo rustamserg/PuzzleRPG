@@ -1,15 +1,7 @@
-from scenes.game_scene import GameScene
-from scenes.intro_scene import IntroScene
-
-
 class Director:
     def __init__(self):
         self.scenes = {}
         self.active_scene = None
-
-    def compose(self):
-        self.add_scene(GameScene())
-        self.add_scene(IntroScene())
 
     def add_scene(self, scene):
         self.scenes[scene.tag] = scene

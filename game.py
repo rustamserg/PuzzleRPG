@@ -6,6 +6,8 @@ import globals
 from globals import TurnType
 from core.observable import Observable
 from core.director import Director
+from scenes.game_scene import GameScene
+from scenes.intro_scene import IntroScene
 
 
 class Game(Observable):
@@ -17,7 +19,8 @@ class Game(Observable):
         self.tiles = pygame.image.load(os.path.join('data', 'tiles.png')).convert_alpha()
 
     def init(self):
-        self.director.compose()
+        self.director.add_scene(GameScene())
+        self.director.add_scene(IntroScene())
 
     def start(self):
         self.camera_view = pygame.Rect(0, 0, globals.VIEW_WIDTH, globals.VIEW_HEIGHT)

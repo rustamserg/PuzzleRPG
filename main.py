@@ -1,9 +1,11 @@
 #!/usr/bin/env python
+import sys
 import pygame
 
 import globals
 from core.hex_map import HexMap
 from game import Game
+from editor import Editor
 
 black = pygame.Color(0, 0, 0)
 
@@ -12,8 +14,6 @@ pygame.init()
 size = [globals.WINDOW_WIDTH, globals.WINDOW_HEIGHT]
 screen = pygame.display.set_mode(size)
 
-pygame.display.set_caption("HEX")
-
 done = False
 clock = pygame.time.Clock()
 
@@ -21,7 +21,13 @@ background = pygame.Surface(screen.get_size())
 background = background.convert()
 
 hex_map = HexMap(globals.WORLD_WIDTH, globals.WORLD_HEIGHT)
-game = Game(background, hex_map)
+
+if len(sys.argv) == 2 and sys.argv[1] == 'editor':
+    pygame.display.set_caption("Editor")
+    game = Editor(background, hex_map)
+else:
+    pygame.display.set_caption("HEX")
+    game = Game(background, hex_map)
 
 game.init()
 game.start()
