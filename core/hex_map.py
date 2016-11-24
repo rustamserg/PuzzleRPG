@@ -1,4 +1,6 @@
 from core.cell import Cell
+import globals
+from entities.ground import GroundType
 
 
 class HexMap:
@@ -7,6 +9,7 @@ class HexMap:
         self.height = height
         self.width = width
         self.init_map()
+        self.load_map()
 
     def init_map(self):
         for row in range(self.height):
@@ -18,6 +21,18 @@ class HexMap:
                     self.cells[row].append(None)
                 else:
                     self.cells[row].append(Cell(row, column))
+
+    def load_map(self):
+        for row in range(self.height):
+            for column in range(self.width):
+                cell = self.get_cell(row, column)
+                if cell:
+                    if row < globals.CAMERA_ROW or row > globals.WORLD_WIDTH - globals.CAMERA_ROW:
+                        cell.ground = GroundType.WATER
+                    elif column < globals.CAMERA_COLUMN or column > globals.WORLD_HEIGHT - globals.CAMERA_COLUMN:
+                        cell.ground = GroundType.WATER
+                    else:
+                        cell.ground = GroundType.SAND
 
     def get_cell(self, row, column):
         if 0 <= row < self.height:
