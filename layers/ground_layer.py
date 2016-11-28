@@ -11,11 +11,11 @@ class GroundLayer(Layer):
             for column in range(game.hex_map.width):
                 cell = game.hex_map.get_cell(row, column)
                 if cell:
-                    self.add_entity(Ground(cell, cell.ground))
+                    self.add_entity(Ground(cell))
 
     def can_move_to_cell(self, cell):
         for ent in self.entities:
             if ent.cell == cell:
-                if ent.ground_type == GroundType.GRASS or ent.ground_type == GroundType.SAND:
+                if ent.cell.ground == GroundType.GRASS or ent.cell.ground == GroundType.SAND:
                     return True
         return False

@@ -22,9 +22,8 @@ class GroundType:
 
 
 class Ground(Entity):
-    def __init__(self, cell, ground_type):
+    def __init__(self, cell):
         Entity.__init__(self)
-        self.ground_type = ground_type
         self.cell = cell
 
     def draw(self, game, surface):
@@ -35,13 +34,13 @@ class Ground(Entity):
                 x = px + globals.HEX_RADIUS * math.cos(math.radians((ang + 1) * 60))
                 y = py + globals.HEX_RADIUS * math.sin(math.radians((ang + 1) * 60))
                 points.append([x, y])
-            if self.ground_type == GroundType.GRASS:
+            if self.cell.ground == GroundType.GRASS:
                 color = green
-            elif self.ground_type == GroundType.WATER:
+            elif self.cell.ground == GroundType.WATER:
                 color = blue
-            elif self.ground_type == GroundType.SAND:
+            elif self.cell.ground == GroundType.SAND:
                 color = yellow
-            elif self.ground_type == GroundType.STONE:
+            elif self.cell.ground == GroundType.STONE:
                 color = grey
             else:
                 color = black

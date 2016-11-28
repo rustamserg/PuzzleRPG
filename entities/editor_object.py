@@ -24,3 +24,5 @@ class EditorObject(Entity):
     def on_cell_click(self, game, cell):
         self.cell = cell
         game.move_camera(cell)
+        ui_layer = game.scene.get_layer('EditorUILayer')
+        cell.ground = ui_layer.ground_type

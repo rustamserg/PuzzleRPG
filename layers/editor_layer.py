@@ -11,4 +11,4 @@ class EditorLayer(Layer):
             for column in range(game.hex_map.width):
                 cell = game.hex_map.get_cell(row, column)
                 if cell:
-                    self.add_entity(Ground(cell, cell.ground))
+                    self.add_entity(Ground(cell))
