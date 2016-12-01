@@ -3,6 +3,7 @@ class Cell:
         self.row = row
         self.column = column
         self.ground = None
+        self.item = None
 
     def __eq__(self, other):
         return isinstance(other, self.__class__) and other.column == self.column and other.row == self.row

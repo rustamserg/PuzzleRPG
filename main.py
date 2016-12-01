@@ -20,13 +20,14 @@ clock = pygame.time.Clock()
 background = pygame.Surface(screen.get_size())
 background = background.convert()
 
-hex_map = HexMap(globals.WORLD_WIDTH, globals.WORLD_HEIGHT)
 
 if len(sys.argv) == 2 and sys.argv[1] == 'editor':
     pygame.display.set_caption("Editor")
+    hex_map = HexMap(globals.WORLD_WIDTH, globals.WORLD_HEIGHT)
     game = Editor(background, hex_map)
 else:
     pygame.display.set_caption("HEX")
+    hex_map = HexMap(globals.WORLD_WIDTH, globals.WORLD_HEIGHT, 'world.json')
     game = Game(background, hex_map)
 
 game.init()
