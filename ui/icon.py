@@ -4,7 +4,7 @@ from data import tiles_data
 
 
 class Icon(Entity):
-    def __init__(self, pos, tile, tile_back=pygame.Color(0, 0, 0), data=None, width=32, height=32):
+    def __init__(self, pos, tile=None, tile_back=pygame.Color(0, 0, 0), data=None, width=32, height=32):
         Entity.__init__(self)
         self.pos = pos
         self.width = width
@@ -26,4 +26,4 @@ class Icon(Entity):
         if self.tile:
             surface.blit(game.tiles, (self.pos[0], self.pos[1]), tiles_data.TILES[self.tile])
         if self.selected:
-            pygame.draw.rect(surface, pygame.Color(255, 255, 255), self.icon_rect, 2)
+            pygame.draw.rect(surface, pygame.Color(255, 0, 0), self.icon_rect, 2)

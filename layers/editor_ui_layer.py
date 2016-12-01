@@ -20,15 +20,15 @@ class EditorUILayer(Layer):
         cursor = EditorObject(cell)
         self.add_entity(cursor)
 
-        ico = Icon((globals.VIEW_OFFSET[0], globals.WINDOW_HEIGHT - 100), None, blue, 'water')
+        ico = Icon((globals.VIEW_OFFSET[0], globals.WINDOW_HEIGHT - 100), tile_back=blue, data='water')
         ico.on_click = self.on_icon_selected
         self.add_entity(ico)
 
-        ico = Icon((globals.VIEW_OFFSET[0] + 40, globals.WINDOW_HEIGHT - 100), None, green, 'grass')
+        ico = Icon((globals.VIEW_OFFSET[0] + 40, globals.WINDOW_HEIGHT - 100), tile_back=green, data='grass')
         ico.on_click = self.on_icon_selected
         self.add_entity(ico)
 
-        ico = Icon((globals.VIEW_OFFSET[0] + 80, globals.WINDOW_HEIGHT - 100), None, yellow, 'sand')
+        ico = Icon((globals.VIEW_OFFSET[0] + 80, globals.WINDOW_HEIGHT - 100), tile_back=yellow, data='sand')
         ico.on_click = self.on_icon_selected
         self.add_entity(ico)
 
