@@ -18,7 +18,7 @@ class Icon(Entity):
 
     def on_pos_click(self, game, pos):
         if self.icon_rect.collidepoint(pos):
-            if self.on_click:
+            if self.on_click and not self.selected:
                 self.on_click(self, game)
 
     def draw(self, game, surface):
