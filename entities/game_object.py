@@ -1,6 +1,5 @@
 import pygame
 from core.entity import Entity
-from data import tiles_data
 import globals
 import random
 
@@ -30,19 +29,19 @@ class GameObject(Entity):
         if self.location == ObjectLocation.GROUND:
             if game.is_in_camera(self.ground_cell):
                 px, py = game.cell_to_ul_screen(self.ground_cell)
-                surface.blit(game.tiles, (px, py), tiles_data.TILES[self.tile_name])
+                surface.blit(game.tiles.images[self.tile_name], (px, py))
 
         elif self.location == ObjectLocation.INVENTORY:
             px = globals.VIEW_OFFSET[0] + self.inv_cell.column * globals.INVENTORY_CELL_SIZE + globals.HEX_RADIUS / 2
             py = globals.VIEW_OFFSET[1] + self.inv_cell.row * globals.INVENTORY_CELL_SIZE + globals.HEX_RADIUS / 2
-            surface.blit(game.tiles, (px, py), tiles_data.TILES[self.tile_name])
+            surface.blit(game.tiles.images[self.tile_name], (px, py))
             if self.count >= 0:
                 label = self.font.render(str(self.count), 1, (255, 255, 0))
                 surface.blit(label, (px + globals.HEX_RADIUS, py + globals.HEX_RADIUS))
 
         elif self.location == ObjectLocation.PLAYER:
             px, py = globals.WINDOW_WIDTH - 180, globals.WINDOW_HEIGHT - 100
-            surface.blit(game.tiles, (px, py), tiles_data.TILES[self.tile_name])
+            surface.blit(game.tiles.images[self.tile_name], (px, py))
             if self.count >= 0:
                 label = self.font.render(str(self.count), 1, (255, 255, 0))
                 surface.blit(label, (px + globals.HEX_RADIUS, py + globals.HEX_RADIUS))

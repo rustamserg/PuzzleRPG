@@ -1,8 +1,6 @@
 import globals
 from globals import TurnType
-from core.cell import Cell
 from core.entity import Entity
-from data import tiles_data
 
 
 class Player(Entity):
@@ -14,7 +12,7 @@ class Player(Entity):
     def draw(self, game, surface):
         if game.is_in_camera(self.cell):
             px, py = game.cell_to_ul_screen(self.cell)
-            surface.blit(game.tiles, (px, py), tiles_data.TILES['player'])
+            surface.blit(game.tiles.images['player'], (px, py))
 
     def on_tod_changed(self, event):
         self.hunger += globals.PLAYER_HUNGER_SPEED

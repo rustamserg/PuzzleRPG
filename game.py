@@ -8,6 +8,7 @@ from core.observable import Observable
 from core.director import Director
 from scenes.game_scene import GameScene
 from scenes.intro_scene import IntroScene
+from data.tiles import Tiles
 
 
 class Game(Observable):
@@ -16,7 +17,7 @@ class Game(Observable):
         self.surface = surface
         self.hex_map = hex_map
         self.director = Director()
-        self.tiles = pygame.image.load(os.path.join('data', 'tiles.png')).convert_alpha()
+        self.tiles = Tiles('data')
 
     def init(self):
         self.director.add_scene(GameScene())
