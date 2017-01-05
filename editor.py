@@ -6,6 +6,7 @@ import globals
 from globals import TurnType
 from core.director import Director
 from scenes.editor_scene import EditorScene
+from data.tiles import Tiles
 
 
 class Editor:
@@ -14,7 +15,7 @@ class Editor:
         self.hex_map = hex_map
         self.camera_view = None
         self.director = Director()
-        self.tiles = pygame.image.load(os.path.join('data', 'tiles.png')).convert_alpha()
+        self.tiles = Tiles('data')
 
     def init(self):
         self.director.add_scene(EditorScene())
