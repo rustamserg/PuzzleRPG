@@ -26,6 +26,7 @@ class EditorObject(Entity):
             ui_layer = game.scene.get_layer('EditorUILayer')
             cell.ground = ui_layer.ground_type
             cell.item = ui_layer.item
+            game.scene.get_layer('ItemsLayer').spawn_item(cell)
         else:
             self.cell = cell
             game.move_camera(cell)

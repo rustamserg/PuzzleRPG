@@ -37,6 +37,7 @@ class HexMap:
         for c in map_data['cells']:
             cell = self.get_cell(c['row'], c['column'])
             cell.ground = c['ground']
+            cell.item = c['item']
 
     def save_map(self, map_name):
         map_data = {'cells': []}
@@ -44,7 +45,7 @@ class HexMap:
             for column in range(self.width):
                 cell = self.get_cell(row, column)
                 if cell:
-                    cell_data = {'row': row, 'column': column, 'ground': cell.ground}
+                    cell_data = {'row': row, 'column': column, 'ground': cell.ground, 'item': cell.item}
                     map_data['cells'].append(cell_data)
         with open(map_name, 'w') as data:
             json.dump(map_data, data)
