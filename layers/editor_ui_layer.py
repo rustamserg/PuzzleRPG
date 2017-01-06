@@ -14,7 +14,7 @@ blue = pygame.Color(0, 0, 255)
 class EditorUILayer(Layer):
     def __init__(self, z_order):
         Layer.__init__(self, z_order)
-        self.ground_type = GroundType.SAND
+        self.ground_type = None
         self.item = None
         self.icon_items = {'liana_01': 'liana.Liana',
                            'tree_01': 'tree.Tree',
@@ -61,6 +61,9 @@ class EditorUILayer(Layer):
         self.add_entity(btn)
 
     def on_icon_selected(self, icon, game):
+        self.ground_type = None
+        self.item = None
+
         if icon.data == 'water':
             self.ground_type = GroundType.WATER
         elif icon.data == 'grass':
