@@ -60,7 +60,7 @@ class EditorUILayer(Layer):
         btn.on_click = self.on_load_map
         self.add_entity(btn)
 
-    def on_icon_selected(self, icon, game):
+    def on_icon_selected(self, icon, _):
         self.ground_type = None
         self.item = None
 
@@ -78,10 +78,12 @@ class EditorUILayer(Layer):
             ent.selected = False
         icon.selected = True
 
-    def on_save_map(self, game):
+    @staticmethod
+    def on_save_map(game):
         game.hex_map.save_map('world.json')
 
-    def on_load_map(self, game):
+    @staticmethod
+    def on_load_map(game):
         game.hex_map.load_map('world.json')
         game.scene.get_layer('ItemsLayer').init(game)
 
