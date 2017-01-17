@@ -24,11 +24,11 @@ class HexMap:
                 else:
                     cell = Cell(row, column)
                     if row < globals.CAMERA_ROW or row > globals.WORLD_WIDTH - globals.CAMERA_ROW:
-                        cell.ground = GroundType.WATER
+                        cell.layers['ground'] = GroundType.WATER
                     elif column < globals.CAMERA_COLUMN or column > globals.WORLD_HEIGHT - globals.CAMERA_COLUMN:
-                        cell.ground = GroundType.WATER
+                        cell.layers['ground'] = GroundType.WATER
                     else:
-                        cell.ground = GroundType.SAND
+                        cell.layers['ground'] = GroundType.SAND
                     self.cells[row].append(cell)
 
     def load_map(self, map_name):
@@ -36,8 +36,7 @@ class HexMap:
             map_data = json.load(data)
         for c in map_data['cells']:
             cell = self.get_cell(c['row'], c['column'])
-            cell.ground = c['ground']
-            cell.item = c['item']
+            cell.layers = c['layers']
 
     def save_map(self, map_name):
         map_data = {'cells': []}
@@ -45,7 +44,7 @@ class HexMap:
             for column in range(self.width):
                 cell = self.get_cell(row, column)
                 if cell:
-                    cell_data = {'row': row, 'column': column, 'ground': cell.ground, 'item': cell.item}
+                    cell_data = {'row': row, 'column': column, 'layers': cell.layers}
                     map_data['cells'].append(cell_data)
         with open(map_name, 'w') as data:
             json.dump(map_data, data)

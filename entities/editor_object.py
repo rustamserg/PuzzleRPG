@@ -24,9 +24,7 @@ class EditorObject(Entity):
     def on_cell_click(self, game, cell):
         if self.cell == cell:
             ui_layer = game.scene.get_layer('EditorUILayer')
-            if ui_layer.ground_type:
-                cell.ground = ui_layer.ground_type
-            cell.item = ui_layer.item
+            cell.layers.update(ui_layer.layers)
             game.scene.get_layer('ItemsLayer').spawn_item(cell)
         else:
             self.cell = cell
