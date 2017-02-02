@@ -9,6 +9,7 @@ from ui.button import Button
 yellow = pygame.Color(255, 255, 0)
 green = pygame.Color(0, 255, 0)
 blue = pygame.Color(0, 0, 255)
+grey = pygame.Color(100, 100, 100)
 
 
 class EditorUILayer(Layer):
@@ -47,7 +48,12 @@ class EditorUILayer(Layer):
         ico.on_click = self.on_icon_selected
         self.add_entity(ico)
 
-        icon_x = globals.VIEW_OFFSET[0] + 120
+        ico = Icon((globals.VIEW_OFFSET[0] + 160, globals.WINDOW_HEIGHT - 100),
+                   tile_back=grey, data=('ground', GroundType.STONE))
+        ico.on_click = self.on_icon_selected
+        self.add_entity(ico)
+
+        icon_x = globals.VIEW_OFFSET[0] + 200
         for item, item_class in self.icon_items.items():
             icon_x += 40
             ico = Icon((icon_x, globals.WINDOW_HEIGHT - 100), tile=item, data=('item', item_class))
