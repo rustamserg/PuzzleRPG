@@ -7,7 +7,7 @@ class Player(Entity):
     def __init__(self, cell):
         Entity.__init__(self)
         self.cell = cell
-        self.hunger = 0
+        self.hunger = 100
 
     def draw(self, game, surface):
         if game.is_in_camera(self.cell):
@@ -15,8 +15,8 @@ class Player(Entity):
             surface.blit(game.tiles.images['player'], (px, py))
 
     def on_tod_changed(self, event):
-        self.hunger += globals.PLAYER_HUNGER_SPEED
-        if self.hunger > 100:
+        self.hunger -= globals.PLAYER_HUNGER_SPEED
+        if self.hunger < 0:
             event.game.start()
 
     def on_cell_click(self, game, cell):
