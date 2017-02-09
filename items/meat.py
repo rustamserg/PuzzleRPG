@@ -6,5 +6,5 @@ class Meat(GameObject):
         GameObject.__init__(self, cell, 'meat', ['meat_01'])
 
     def on_used(self, game, player):
-        player.hunger = max(100, player.hunger + 10)
+        player.hunger = min(100, player.hunger + 10)
         return True
