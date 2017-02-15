@@ -24,10 +24,7 @@ class AILayer(Layer):
                     to_spawn -= 1
 
     def get_ai_from_cell(self, cell):
-        for ent in self.entities:
-            if ent.ground_cell == cell:
-                return ent
-        return None
+        return next((ent for ent in self.entities if ent.ground_cell == cell), None)
 
     def update(self, game, turn):
         if turn == TurnType.PLAYER:
