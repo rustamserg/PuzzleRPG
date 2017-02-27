@@ -12,6 +12,10 @@ class Cell:
     def item(self):
         return self.layers['item'] if 'item' in self.layers.keys() else None
 
+    @property
+    def script(self):
+        return self.layers['script'] if 'script' in self.layers.keys() else None
+
     def __eq__(self, other):
         return isinstance(other, self.__class__) and other.column == self.column and other.row == self.row
 

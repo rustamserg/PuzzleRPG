@@ -25,7 +25,9 @@ class EditorObject(Entity):
         if self.cell == cell:
             ui_layer = game.scene.get_layer('EditorUILayer')
             cell.layers.update(ui_layer.layers)
+
             game.scene.get_layer('ItemsLayer').spawn_item(cell)
+            game.scene.get_layer('ScriptLayer').spawn_script(cell)
         else:
             self.cell = cell
             game.move_camera(cell)

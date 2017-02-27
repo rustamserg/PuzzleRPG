@@ -22,8 +22,7 @@ class EditorUILayer(Layer):
                            'stick_01': 'stick.Stick',
                            'log_01': 'log.Log',
                            'raw_meat_01': 'raw_meat.RawMeat',
-                           'camp_01': 'camp.Camp',
-                           'spawn_marker': 'spawn_point.SpawnPoint'}
+                           'camp_01': 'camp.Camp'}
 
     def init(self, game):
         cell = game.hex_map.get_cell(globals.CAMERA_ROW, globals.CAMERA_COLUMN)
@@ -54,7 +53,12 @@ class EditorUILayer(Layer):
         ico.on_click = self.on_icon_selected
         self.add_entity(ico)
 
-        icon_x = globals.VIEW_OFFSET[0] + 200
+        ico = Icon((globals.VIEW_OFFSET[0] + 200, globals.WINDOW_HEIGHT - 100),
+                   tile='spawn_marker', data=('script', 'spawn_point.SpawnPoint'))
+        ico.on_click = self.on_icon_selected
+        self.add_entity(ico)
+
+        icon_x = globals.VIEW_OFFSET[0] + 240
         for item, item_class in self.icon_items.items():
             icon_x += 40
             ico = Icon((icon_x, globals.WINDOW_HEIGHT - 100), tile=item, data=('item', item_class))
@@ -73,6 +77,7 @@ class EditorUILayer(Layer):
         self.layers = {}
         if icon.data[0] == 'eraser':
             self.layers['item'] = None
+            self.layers['script'] = None
         else:
             self.layers[icon.data[0]] = icon.data[1]
 
