@@ -54,7 +54,7 @@ class EditorUILayer(Layer):
         self.add_entity(ico)
 
         ico = Icon((globals.VIEW_OFFSET[0] + 200, globals.WINDOW_HEIGHT - 100),
-                   tile='spawn_marker', data=('script', 'spawn_point.SpawnPoint'))
+                   tile='deer_01', data=('script', 'spawn_point.SpawnPoint'))
         ico.on_click = self.on_icon_selected
         self.add_entity(ico)
 
@@ -93,3 +93,4 @@ class EditorUILayer(Layer):
     def on_load_map(game):
         game.hex_map.load_map('world.json')
         game.scene.get_layer('ItemsLayer').init(game)
+        game.scene.get_layer('ScriptLayer').init(game)
