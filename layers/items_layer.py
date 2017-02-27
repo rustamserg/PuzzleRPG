@@ -22,6 +22,6 @@ class ItemsLayer(Layer):
 
     def get_item_from_cell(self, cell):
         for ent in self.entities:
-            if ent.ground_cell == cell:
+            if ent.ground_cell == cell and ent.archetype != 'script':
                 return ent
         return None

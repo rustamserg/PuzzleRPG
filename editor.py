@@ -15,6 +15,7 @@ class Editor:
         self.camera_view = None
         self.director = Director()
         self.tiles = Tiles('data')
+        self.is_editor = True
 
     def init(self):
         self.director.add_scene(EditorScene())

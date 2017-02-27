@@ -26,6 +26,9 @@ class GameObject(Entity):
         self.tile_name = random.choice(tile_names)
 
     def draw(self, game, surface):
+        if self.archetype == "script" and not game.is_editor:
+            return
+
         if self.location == ObjectLocation.GROUND:
             if game.is_in_camera(self.ground_cell):
                 px, py = game.cell_to_ul_screen(self.ground_cell)
@@ -47,6 +50,9 @@ class GameObject(Entity):
                 surface.blit(label, (px + globals.HEX_RADIUS, py + globals.HEX_RADIUS))
 
     def on_pos_click(self, game, pos):
+        if self.archetype == "script":
+            return
+
         if self.location == ObjectLocation.PLAYER:
             if self.count > 0:
                 player_layer = game.scene.get_layer('PlayerLayer')
@@ -58,6 +64,9 @@ class GameObject(Entity):
                         self.count -= 1
 
     def do_action(self, game, by_entity):
+        if self.archetype == "script":
+            return
+
         result = False
         if by_entity.count > 0:
             result = self.try_combine(game, by_entity)

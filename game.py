@@ -18,6 +18,7 @@ class Game(Observable):
         self.hex_map = hex_map
         self.director = Director()
         self.tiles = Tiles('data')
+        self.is_editor = False
 
     def init(self):
         self.director.add_scene(GameScene())

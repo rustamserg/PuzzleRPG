@@ -22,7 +22,8 @@ class EditorUILayer(Layer):
                            'stick_01': 'stick.Stick',
                            'log_01': 'log.Log',
                            'raw_meat_01': 'raw_meat.RawMeat',
-                           'camp_01': 'camp.Camp'}
+                           'camp_01': 'camp.Camp',
+                           'spawn_marker': 'spawn_point.SpawnPoint'}
 
     def init(self, game):
         cell = game.hex_map.get_cell(globals.CAMERA_ROW, globals.CAMERA_COLUMN)
@@ -34,7 +35,7 @@ class EditorUILayer(Layer):
         self.add_entity(ico)
 
         ico = Icon((globals.VIEW_OFFSET[0] + 40, globals.WINDOW_HEIGHT - 100),
-                   tile_back=blue, data=('ground', GroundType.WATER));
+                   tile_back=blue, data=('ground', GroundType.WATER))
         ico.on_click = self.on_icon_selected
         self.add_entity(ico)
 
