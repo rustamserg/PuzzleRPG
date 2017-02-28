@@ -53,8 +53,8 @@ class EditorUILayer(Layer):
         ico.on_click = self.on_icon_selected
         self.add_entity(ico)
 
-        ico = Icon((globals.VIEW_OFFSET[0] + 200, globals.WINDOW_HEIGHT - 100),
-                   tile='deer_01', data=('script', 'spawn_point.SpawnPoint'))
+        ico = Icon((globals.VIEW_OFFSET[0] + 200, globals.WINDOW_HEIGHT - 100), tile='deer_01',
+                   data=('script', {'entity': 'spawn_point.SpawnPoint', 'params': {'ai': 'deer.Deer'}}))
         ico.on_click = self.on_icon_selected
         self.add_entity(ico)
 
