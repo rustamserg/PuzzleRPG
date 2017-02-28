@@ -1,6 +1,6 @@
-from entities.game_object import GameObject
+from entities.script_object import ScriptObject
 
 
-class SpawnPoint(GameObject):
-    def __init__(self, cell):
-        GameObject.__init__(self, cell, 'script', ['deer_01'])
+class SpawnPoint(ScriptObject):
+    def __init__(self, cell, **kwargs):
+        ScriptObject.__init__(self, cell, 'deer_01', **kwargs)

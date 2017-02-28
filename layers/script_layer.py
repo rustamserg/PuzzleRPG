@@ -17,7 +17,7 @@ class ScriptLayer(Layer):
         tag = 'script_%i_%i' % (cell.row, cell.column)
         self.del_entity(tag)
         if cell.script:
-            script = ObjectFactory.create_entity(cell.script, cell)
+            script = ObjectFactory.create_script(cell.script, cell)
             self.add_entity(script, tag)
 
     def draw(self, game, surface):

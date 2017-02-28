@@ -10,8 +10,8 @@ class ObjectFactory:
         return c(ground_cell)
 
     @staticmethod
-    def create_entity(item, ground_cell):
-        parts = item.split('.')
+    def create_script(script, ground_cell, **kwargs):
+        parts = script.split('.')
         m = importlib.import_module('entities.' + '.'.join(parts[:-1]))
         c = getattr(m, parts[-1])
-        return c(ground_cell)
+        return c(ground_cell, **kwargs)
