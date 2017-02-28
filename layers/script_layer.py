@@ -1,5 +1,5 @@
 from core.layer import Layer
-from items.item_factory import ItemFactory
+from entities.object_factory import ObjectFactory
 
 
 class ScriptLayer(Layer):
@@ -17,7 +17,7 @@ class ScriptLayer(Layer):
         tag = 'script_%i_%i' % (cell.row, cell.column)
         self.del_entity(tag)
         if cell.script:
-            script = ItemFactory.create(cell.script, cell)
+            script = ObjectFactory.create_entity(cell.script, cell)
             self.add_entity(script, tag)
 
     def draw(self, game, surface):

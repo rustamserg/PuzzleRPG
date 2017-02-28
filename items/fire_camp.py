@@ -1,5 +1,5 @@
 from entities.game_object import GameObject
-from items.item_factory import ItemFactory
+from entities.object_factory import ObjectFactory
 
 
 class FireCamp(GameObject):
@@ -12,7 +12,7 @@ class FireCamp(GameObject):
     def try_combine(self, game, by_entity):
         if by_entity.archetype == 'raw_meat':
             inv_layer = game.scene.get_layer('InventoryLayer')
-            inv_layer.add_to_inventory(ItemFactory.create('meat.Meat', None))
+            inv_layer.add_to_inventory(ObjectFactory.create_item('meat.Meat', None))
             return True
         return False
 
@@ -20,4 +20,4 @@ class FireCamp(GameObject):
         if event.hours == 6 and event.minutes == 0:
             items_layer = event.game.scene.get_layer('ItemsLayer')
             items_layer.del_entity(self.tag)
-            items_layer.add_entity(ItemFactory.create('camp.Camp', self.ground_cell), self.tag)
+            items_layer.add_entity(ObjectFactory.create_item('camp.Camp', self.ground_cell), self.tag)

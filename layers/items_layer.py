@@ -1,5 +1,5 @@
 from core.layer import Layer
-from items.item_factory import ItemFactory
+from entities.object_factory import ObjectFactory
 
 
 class ItemsLayer(Layer):
@@ -17,7 +17,7 @@ class ItemsLayer(Layer):
         tag = 'item_%i_%i' % (cell.row, cell.column)
         self.del_entity(tag)
         if cell.item:
-            item = ItemFactory.create(cell.item, cell)
+            item = ObjectFactory.create_item(cell.item, cell)
             self.add_entity(item, tag)
 
     def get_item_from_cell(self, cell):

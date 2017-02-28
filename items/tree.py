@@ -1,5 +1,5 @@
 from entities.game_object import GameObject
-from items.item_factory import ItemFactory
+from entities.object_factory import ObjectFactory
 
 
 class Tree(GameObject):
@@ -13,5 +13,5 @@ class Tree(GameObject):
         if by_entity.archetype == 'axe':
             items_layer = game.scene.get_layer('ItemsLayer')
             items_layer.del_entity(self.tag)
-            items_layer.add_entity(ItemFactory.create('log.Log', self.ground_cell), self.tag)
+            items_layer.add_entity(ObjectFactory.create_item('log.Log', self.ground_cell), self.tag)
         return False
