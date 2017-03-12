@@ -1,9 +1,8 @@
-import random
 import time
 
 from globals import TurnType
-from ai.deer import Deer
 from core.layer import Layer
+from entities.object_factory import ObjectFactory
 
 
 class AILayer(Layer):
@@ -11,17 +10,10 @@ class AILayer(Layer):
         Layer.__init__(self, z_order)
         self.move_time = time.monotonic()
 
-    def start(self, game):
-        ground_layer = game.scene.get_layer('GroundLayer')
-        to_spawn = 10
-        while to_spawn > 0:
-            row = random.randint(1, game.hex_map.height / 4 - 1)
-            column = random.randint(1, game.hex_map.width / 4 - 1)
-            cell = game.hex_map.get_cell(row, column)
-            if cell is not None:
-                if ground_layer.can_move_to_cell(cell):
-                    self.add_entity(Deer(cell), 'deer_%i' % to_spawn)
-                    to_spawn -= 1
+    def spawn_ai(self, archetype, tag, cell):
+        if not self.get_ai_from_cell(cell):
+            ai_entity = ObjectFactory.create_ai(archetype, cell)
+            self.add_entity(ai_entity, tag)
 
     def get_ai_from_cell(self, cell):
         return next((ent for ent in self.entities if ent.ground_cell == cell), None)

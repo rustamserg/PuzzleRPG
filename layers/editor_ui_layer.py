@@ -81,7 +81,7 @@ class EditorUILayer(Layer):
         else:
             self.layers[icon.data[0]] = icon.data[1]
 
-        for ent in self.get_entities('Icon'):
+        for ent in self.get_entities_by_tag('Icon'):
             ent.selected = False
         icon.selected = True
 

@@ -18,14 +18,14 @@ class UILayer(Layer):
         self.add_entity(Label((globals.WINDOW_WIDTH - 200, 10)), 'lbl_tod')
 
     def update(self, game, turn):
-        lbl = self.get_first_entity('lbl_status')
+        lbl = self.get_first_entity_by_tag('lbl_status')
         lbl.text = 'Turn: %s' % turn
 
         player_layer = game.scene.get_layer('PlayerLayer')
-        lbl = self.get_first_entity('lbl_hunger')
+        lbl = self.get_first_entity_by_tag('lbl_hunger')
         lbl.text = 'Hunger: %i' % player_layer.get_hunger()
 
-        lbl = self.get_first_entity('lbl_tod')
+        lbl = self.get_first_entity_by_tag('lbl_tod')
         lbl.text = 'Time: %.2i:%.2i' % (game.tod[0], game.tod[1])
 
     @staticmethod

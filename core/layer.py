@@ -18,10 +18,13 @@ class Layer:
         entity.tag = tag if tag else entity.tag
         self.entities.append(entity)
 
-    def get_entities(self, tag):
+    def get_entities_by_tag(self, tag):
         return [ent for ent in self.entities if ent.tag == tag]
 
-    def get_first_entity(self, tag):
+    def get_entities(self, compare):
+        return [ent for ent in self.entities if compare(ent)]
+
+    def get_first_entity_by_tag(self, tag):
         return next((ent for ent in self.entities if ent.tag == tag), None)
 
     def del_entity(self, tag):

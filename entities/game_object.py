@@ -50,7 +50,7 @@ class GameObject(Entity):
         if self.location == ObjectLocation.PLAYER:
             if self.count > 0:
                 player_layer = game.scene.get_layer('PlayerLayer')
-                player = player_layer.get_first_entity('player')
+                player = player_layer.get_first_entity_by_tag('player')
                 px, py = game.cell_to_ul_screen(player.cell)
                 rect = pygame.Rect(px, py, globals.HEX_RADIUS, globals.HEX_RADIUS)
                 if rect.collidepoint(pos):

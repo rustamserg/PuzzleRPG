@@ -26,6 +26,6 @@ class Deer(GameObject):
             ai_layer = game.scene.get_layer('AILayer')
             items_layer = game.scene.get_layer('ItemsLayer')
             ai_layer.del_entity(self.tag)
-            item_tag = 'item_%i_%i' % (self.ground_cell.row, self.ground_cell.column)
+            item_tag = 'item_%s' % str(self.ground_cell)
             items_layer.add_entity(RawMeat(self.ground_cell), item_tag)
         return False

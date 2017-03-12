@@ -15,3 +15,10 @@ class ObjectFactory:
         m = importlib.import_module('entities.' + '.'.join(parts[:-1]))
         c = getattr(m, parts[-1])
         return c(ground_cell, **kwargs)
+
+    @staticmethod
+    def create_ai(ai, ground_cell):
+        parts = ai.split('.')
+        m = importlib.import_module('ai.' + '.'.join(parts[:-1]))
+        c = getattr(m, parts[-1])
+        return c(ground_cell)

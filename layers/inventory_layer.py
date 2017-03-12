@@ -30,21 +30,21 @@ class InventoryLayer(Layer):
         self.add_entity(btn_craft)
 
     def del_from_inventory(self, item):
-        inv_cell = self.get_first_entity('cell_%i_%i' % (item.inv_cell.row, item.inv_cell.column))
+        inv_cell = self.get_first_entity_by_tag('cell_%i_%i' % (item.inv_cell.row, item.inv_cell.column))
         inv_cell.item = None
         self.del_entity(item.tag)
 
     def add_to_inventory(self, item):
         for row in range(globals.INVENTORY_HEIGHT):
             for col in range(globals.INVENTORY_WIDTH):
-                inv_cell = self.get_first_entity('cell_%i_%i' % (row, col))
+                inv_cell = self.get_first_entity_by_tag('cell_%i_%i' % (row, col))
                 if inv_cell.item and inv_cell.item.archetype == item.archetype:
                     inv_cell.item.count += 1
                     return
 
         for row in range(globals.INVENTORY_HEIGHT):
             for col in range(globals.INVENTORY_WIDTH):
-                inv_cell = self.get_first_entity('cell_%i_%i' % (row, col))
+                inv_cell = self.get_first_entity_by_tag('cell_%i_%i' % (row, col))
                 if not inv_cell.item:
                     inv_cell.item = item
                     item.location = ObjectLocation.INVENTORY
@@ -57,7 +57,7 @@ class InventoryLayer(Layer):
         selected = []
         for row in range(globals.INVENTORY_HEIGHT):
             for col in range(globals.INVENTORY_WIDTH):
-                cell = self.get_first_entity('cell_%i_%i' % (row, col))
+                cell = self.get_first_entity_by_tag('cell_%i_%i' % (row, col))
                 if cell.selected:
                     selected.append(cell.item)
         return selected
@@ -65,7 +65,7 @@ class InventoryLayer(Layer):
     def reset_selection(self):
         for row in range(globals.INVENTORY_HEIGHT):
             for col in range(globals.INVENTORY_WIDTH):
-                cell = self.get_first_entity('cell_%i_%i' % (row, col))
+                cell = self.get_first_entity_by_tag('cell_%i_%i' % (row, col))
                 cell.selected = False
 
     def close_inventory(self, game):
@@ -82,7 +82,7 @@ class InventoryLayer(Layer):
     def do_craft(self, game):
         selected = self.get_selected_cells()
         if len(selected) > 1:
-            craft = self.get_first_entity('craft')
+            craft = self.get_first_entity_by_tag('craft')
             if craft:
                 crafted = craft.combine(selected)
                 if crafted:

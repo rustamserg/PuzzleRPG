@@ -17,7 +17,7 @@ class PlayerLayer(Layer):
         self.take_item(game, EmptyHand(spawn_cell))
 
     def take_item(self, game, item):
-        hand_item = self.get_first_entity('hand_item')
+        hand_item = self.get_first_entity_by_tag('hand_item')
         if not hand_item:
             self.add_entity(item, 'hand_item')
             item.location = ObjectLocation.PLAYER
@@ -33,26 +33,26 @@ class PlayerLayer(Layer):
                 inv_layer.add_to_inventory(hand_item)
 
     def use_item(self, game, item):
-        player = self.get_first_entity('player')
+        player = self.get_first_entity_by_tag('player')
         return item.on_used(game, player)
 
     def get_health(self):
-        player = self.get_first_entity('player')
+        player = self.get_first_entity_by_tag('player')
         return player.health
 
     def get_hunger(self):
-        player = self.get_first_entity('player')
+        player = self.get_first_entity_by_tag('player')
         return player.hunger
 
     def get_fatigue(self):
-        player = self.get_first_entity('player')
+        player = self.get_first_entity_by_tag('player')
         return player.fatigue
 
     def pick_up_item(self, game, item):
         items_layer = game.scene.get_layer('ItemsLayer')
         items_layer.del_entity(item.tag)
 
-        hand_item = self.get_first_entity('hand_item')
+        hand_item = self.get_first_entity_by_tag('hand_item')
         if hand_item and hand_item.archetype == item.archetype:
             hand_item.count += item.count
         else:

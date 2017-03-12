@@ -32,7 +32,7 @@ class Player(Entity):
             if c == cell:
                 item = items_layer.get_item_from_cell(cell)
                 if item:
-                    hand_item = player_layer.get_first_entity('hand_item')
+                    hand_item = player_layer.get_first_entity_by_tag('hand_item')
                     if hand_item:
                         item.do_action(game, hand_item)
                     game.end_turn()
@@ -40,7 +40,7 @@ class Player(Entity):
                 else:
                     ai = ai_layer.get_ai_from_cell(cell)
                     if ai:
-                        hand_item = player_layer.get_first_entity('hand_item')
+                        hand_item = player_layer.get_first_entity_by_tag('hand_item')
                         if hand_item:
                             ai.do_action(game, hand_item)
                         game.end_turn()
