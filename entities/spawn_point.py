@@ -4,7 +4,7 @@ from globals import TurnType
 
 class SpawnPoint(ScriptObject):
     def __init__(self, cell, **kwargs):
-        ScriptObject.__init__(self, cell, 'deer_01', **kwargs)
+        ScriptObject.__init__(self, cell, **kwargs)
         self.counter = 0
         for key, value in kwargs.items():
             print("%s = %s" % (key, value))

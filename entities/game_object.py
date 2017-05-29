@@ -14,7 +14,7 @@ class ObjectLocation:
 
 
 class GameObject(Entity):
-    def __init__(self, cell, archetype, tile_names):
+    def __init__(self, cell, archetype, tile_names = None):
         Entity.__init__(self)
         self.ground_cell = cell
         self.archetype = archetype
@@ -23,9 +23,12 @@ class GameObject(Entity):
         self.selected = False
         self.font = pygame.font.SysFont("monospace", 12)
         self.location = ObjectLocation.GROUND
-        self.tile_name = random.choice(tile_names)
+        self.tile_name = random.choice(tile_names) if tile_names else None
 
     def draw(self, game, surface):
+        if not self.tile_name:
+            return
+
         if self.location == ObjectLocation.GROUND:
             if game.is_in_camera(self.ground_cell):
                 px, py = game.cell_to_ul_screen(self.ground_cell)
