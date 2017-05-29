@@ -16,13 +16,15 @@ class EditorUILayer(Layer):
     def __init__(self, z_order):
         Layer.__init__(self, z_order)
         self.layers = {}
-        self.icon_items = {'liana_01': 'liana.Liana',
-                           'tree_01': 'tree.Tree',
-                           'sharp_stone_01': 'sharp_stone.SharpStone',
-                           'stick_01': 'stick.Stick',
-                           'log_01': 'log.Log',
-                           'raw_meat_01': 'raw_meat.RawMeat',
-                           'camp_01': 'camp.Camp'}
+        self.icon_items = {'liana_01': ('item', 'liana.Liana'),
+                           'tree_01': ('item', 'tree.Tree'),
+                           'sharp_stone_01': ('item', 'sharp_stone.SharpStone'),
+                           'stick_01': ('item', 'stick.Stick'),
+                           'log_01': ('item', 'log.Log'),
+                           'raw_meat_01': ('item', 'raw_meat.RawMeat'),
+                           'camp_01': ('item', 'camp.Camp'),
+                           'deer_01': ('script', {'entity': 'spawn_point.SpawnPoint',
+                                                  'params': {'ai_type': 'deer.Deer', 'ai_count': 2}})}
 
     def init(self, game):
         cell = game.hex_map.get_cell(globals.CAMERA_ROW, globals.CAMERA_COLUMN)
@@ -53,15 +55,10 @@ class EditorUILayer(Layer):
         ico.on_click = self.on_icon_selected
         self.add_entity(ico)
 
-        ico = Icon((globals.VIEW_OFFSET[0] + 200, globals.WINDOW_HEIGHT - 100), tile='deer_01',
-                   data=('script', {'entity': 'spawn_point.SpawnPoint', 'params': {'ai': 'deer.Deer'}}))
-        ico.on_click = self.on_icon_selected
-        self.add_entity(ico)
-
-        icon_x = globals.VIEW_OFFSET[0] + 240
+        icon_x = globals.VIEW_OFFSET[0] + 200
         for item, item_class in self.icon_items.items():
             icon_x += 40
-            ico = Icon((icon_x, globals.WINDOW_HEIGHT - 100), tile=item, data=('item', item_class))
+            ico = Icon((icon_x, globals.WINDOW_HEIGHT - 100), tile=item, data=item_class)
             ico.on_click = self.on_icon_selected
             self.add_entity(ico)
 

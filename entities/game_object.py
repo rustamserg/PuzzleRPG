@@ -14,7 +14,7 @@ class ObjectLocation:
 
 
 class GameObject(Entity):
-    def __init__(self, cell, archetype, tile_names = None):
+    def __init__(self, cell, archetype, tile_names=None):
         Entity.__init__(self)
         self.ground_cell = cell
         self.archetype = archetype
