@@ -23,9 +23,6 @@
 
 The game is developed as gameplay prototype. The pygame is used to speedup development and focus effort on gameplay logic rather than generic game mechanics.
 
-The code is tested and developed with python 3.5 on Mac OS. It is suggested to use homebrew to install pygame:
+The code is tested and developed with python 3.6 on Mac OS. It is suggested to use homebrew to install python and then pip to install pygame itself:
 
-    brew install mercurial
-    brew install git
-    brew install sdl sdl_image sdl_mixer sdl_ttf smpeg portmidi
-    pip3 install hg+http://bitbucket.org/pygame/pygame
+    pip3 install pygame
